@@ -1,12 +1,11 @@
 const COLORS = {
     white: "#FFFFFF",
-    black: "#222222",
+    black: "#000000",
     primary: "#4B9282",
-    secondary: "#AF71C5",
-    claro: "#F4D4FF",
-    gray: "#A2A2A2",
-    blue: "#0E76A8",
-    purple: "#522164"
+    secondary: "#DEA25B",
+    gray: "#7D7474",
+    brown: "#574D4D",
+    lightGreen: "#B7E0D7"
 }
 
 export default COLORS;
