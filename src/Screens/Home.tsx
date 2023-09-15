@@ -5,9 +5,10 @@ import Header from "../Components/Home/Header"; // Import the Header component
 const Home = () => {
   return (
     <div>
-       <MainNavbar />
-      <Header /> {/* Include the Header component here */}
-      {/* Other content for your home page */}
+      <MainNavbar />
+      
+        <Header />
+        
     </div>
   );
 };

@@ -10,7 +10,7 @@ const MainNavbar = () => {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <Navbar expand="lg" style={navbarStyle} fixed="top" variant="dark">
+    <Navbar expand="lg" style={navbarStyle} variant="dark">
       <Container>
         <Navbar.Brand href="#home" style={navBrand}>
           <img
