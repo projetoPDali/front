@@ -5,7 +5,8 @@ const COLORS = {
     secondary: "#DEA25B",
     gray: "#7D7474",
     brown: "#574D4D",
-    lightGreen: "#B7E0D7"
+    lightGreen: "#B7E0D7",
+    lightyellow: "#ECCEAB"
 }
 
 export default COLORS;

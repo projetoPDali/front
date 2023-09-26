@@ -13,8 +13,8 @@ const GreenBotton = () => {
           fontSize: "3vw",
           fontWeight: "bold",
           padding: "0.9vw",
-          marginTop: "3vw",
-          marginLeft: "8vw",
+          marginTop: "4vw",
+          marginLeft: "10vw",
           boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.4)",
         }}
         
