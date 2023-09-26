@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/Button";
 import COLORS from "../../constant/colors";
 
-const GreenBotton = () => {
+const GreenBotton = ({ onClick }: { onClick: React.MouseEventHandler<HTMLButtonElement> }) => {
   return (
     <>
       <Button
@@ -17,7 +17,7 @@ const GreenBotton = () => {
           marginLeft: "10vw",
           boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.4)",
         }}
-        
+        onClick={onClick}
       >
         CADASTRE-SE
       </Button>{" "}

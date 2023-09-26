@@ -5,8 +5,12 @@ import Navbar from "react-bootstrap/Navbar";
 import { navbarStyle, buttonStyle, navLinkStyle, navBrand } from "./styles";
 import logo from "../../assets/logo-simples.png";
 import Button from "react-bootstrap/Button";
+import { useNavigate } from "react-router-dom";
+
 
 const MainNavbar = () => {
+  const navigate = useNavigate();
+
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -42,7 +46,11 @@ const MainNavbar = () => {
           </Nav>
           <Nav className="ml-auto">
             {/* Alinha o botão à direita */}
-            <Button variant="light" style={buttonStyle}>
+            <Button
+              variant="light"
+              style={buttonStyle}
+              onClick={() => navigate("/perfil")}
+            >
               Login
             </Button>
           </Nav>

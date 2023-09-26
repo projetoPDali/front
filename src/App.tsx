@@ -1,13 +1,17 @@
-import 'bootstrap/dist/css/bootstrap.min.css'; 
-//import MainNavbar from './Components/Navbar/Navbar';
-import Home from './Screens/Home';
+import "bootstrap/dist/css/bootstrap.min.css";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "./Screens/Home";
+import Perfil from "./Screens/Perfil";
 
 function App() {
   return (
-    <div className="App">
-     <Home/>
-    </div>
-    
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/perfil" element={<Perfil />} />
+      </Routes>
+    </Router>
   );
 }
 
