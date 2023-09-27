@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './Screens/Home'; // 
-import Perfil from './Screens/Perfil'; // Importe seu componente de perfil
+import Home from './Screens/Home';  
+import Perfil from './Screens/Perfil'; 
+import CadastroBike from './Screens/CadastroBike';
 
 function AppRouter() {
   return (
@@ -9,6 +10,7 @@ function AppRouter() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/perfil" element={<Perfil />} />
+        <Route path="/cadastro-bike" element={<CadastroBike/>} />
       </Routes>
     </Router>
   );
