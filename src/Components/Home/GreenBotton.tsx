@@ -1,9 +1,11 @@
 import Button from "react-bootstrap/Button";
 import COLORS from "../../constant/colors";
+import { useNavigate } from "react-router-dom";
 
-const GreenBotton = ({ onClick }: { onClick: React.MouseEventHandler<HTMLButtonElement> }) => {
-  return (
-    <>
+const GreenBotton = () => {
+  const navigate = useNavigate();
+
+  return ( 
       <Button
         style={{
           width: "22vw",
@@ -17,11 +19,11 @@ const GreenBotton = ({ onClick }: { onClick: React.MouseEventHandler<HTMLButtonE
           marginLeft: "10vw",
           boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.4)",
         }}
-        onClick={onClick}
+       onClick={() => navigate("/perfil")}
       >
         CADASTRE-SE
-      </Button>{" "}
-    </>
+      </Button>
+  
   );
 };
 

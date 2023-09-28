@@ -13,7 +13,7 @@ const Header = () => {
           </h1>
           <p style={styles.sloganStyle}>CONECTANDO LUGARES</p>
         </div>
-        {/* <GreenBotton /> */}
+        <GreenBotton />
       </div>
       <img
         style={styles.img}
