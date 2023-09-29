@@ -1,4 +1,3 @@
-
 import { CSSProperties } from 'react';
 import COLORS from '../../constant/colors';
 
