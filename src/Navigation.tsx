@@ -11,6 +11,7 @@ function AppRouter() {
         <Route path="/" element={<Home />} />
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/cadastro-bike" element={<CadastroBike/>} />
+        <Route path="/login" element={<CadastroBike/>} />
       </Routes>
     </Router>
   );
