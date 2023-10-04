@@ -33,7 +33,9 @@ const Signup = () => {
               }}
             />
             <YellowButton
-              content={<img src={google} alt="Google" width="30" height="30" />}
+              content={<div style={{ display: "flex", alignItems: "center" }}>
+              <img src={google} alt="Google" width="30" height="30" />
+            </div>}
               onClick={() => {
                 // Lógica personalizada para o Botão 2
                 console.log("Botão 2 Clicado");
