@@ -1,5 +1,5 @@
 import React from "react";
-import GreenBotton from "./GreenBotton";
+import GreenBotton from "../Buttons/GreenBotton";
 import * as styles from "./styles"; // Importe os estilos
 import imageHeader from "../../assets/image-header.png";
 

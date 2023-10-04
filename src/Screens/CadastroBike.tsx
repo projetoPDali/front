@@ -5,8 +5,6 @@ import COLORS from "../constant/colors";
 import MainNavbar from "../Components/Navbar/Navbar";
 
 const CadastroBike = () => {
- 
-
   return (
     <div>
       <MainNavbar />
@@ -15,7 +13,7 @@ const CadastroBike = () => {
           <Col
             md={5}
             className="d-none d-md-block"
-            style={{ backgroundColor: COLORS.primary, }}
+            style={{ backgroundColor: COLORS.primary, position: "sticky", top: 0, height: "100vh" }}
           >
             <img
               src={Imagem}
@@ -24,8 +22,8 @@ const CadastroBike = () => {
             />
           </Col>
 
-          <Col xs={12} md={7} style={{backgroundColor: COLORS.lightGray}}>
-            
+          <Col xs={12} md={7} style={{ backgroundColor: COLORS.lightGray, overflowY: "scroll", height: "100vh" }}>
+            <FormBike />
             <FormBike />
           </Col>
         </Row>

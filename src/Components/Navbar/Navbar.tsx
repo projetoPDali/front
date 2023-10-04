@@ -5,7 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { navbarStyle, buttonStyle, navLinkStyle, navBrand } from "./styles";
 import logo from "../../assets/logo-simples.png";
 import Button from "react-bootstrap/Button";
-import {Link, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 
 
 const MainNavbar = () => {
@@ -34,7 +34,7 @@ const MainNavbar = () => {
             <Nav.Link style={navLinkStyle} href="/">
               Inicio
             </Nav.Link>
-            <Nav.Link style={navLinkStyle} href="#features">
+            <Nav.Link style={navLinkStyle} href="">
               Bicicletas
             </Nav.Link>
             <Nav.Link style={navLinkStyle} href="#pricing">
@@ -49,7 +49,7 @@ const MainNavbar = () => {
             <Button
               variant="light"
               style={buttonStyle}
-              onClick={() => navigate("/perfil")}
+              onClick={() => navigate("/login")}
             >
               Login
             </Button>
