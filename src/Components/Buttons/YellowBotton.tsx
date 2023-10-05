@@ -20,16 +20,15 @@ const YellowButton: React.FC<YellowButtonProps> = ({ content, onClick }) => {
   };
 
   return (
-    <Button
+    <Button  className="fixed-button-size"
       style={{
-        width: "13vw",
-        height: "3.5vw",
+
         backgroundColor: COLORS.secondary,
         borderColor: COLORS.secondary,
-        fontSize: "1.5vw",
-        padding: 0,
         fontWeight: "bold",
         boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.4)",
+        minWidth: "150px", // Defina a largura mínima desejada
+        minHeight: "40px",
       }}
       onClick={handleClick}
     >

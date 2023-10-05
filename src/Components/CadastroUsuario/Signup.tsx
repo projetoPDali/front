@@ -11,7 +11,7 @@ const Signup = () => {
         className="align-items-center justify-content-center"
         style={{ minHeight: "100vh" }}
       >
-        <Col xs={6} style={styleCol}>
+        <Col xs={12} md={6} style={styleCol}>
           <h1 style={styleText}>CADASTRE-SE</h1>
 
           <div style={{ paddingRight: 10, paddingLeft: 10 }}>
@@ -21,21 +21,27 @@ const Signup = () => {
             style={{
               display: "flex",
               flexDirection: "row",
-              justifyContent: "space-around",
-              alignItems: "center",
+              justifyContent: "space-around"
             }}
           >
             <YellowButton
               content="Cadastrar"
               onClick={() => {
-                // Lógica personalizada para o Botão 1
                 console.log("Botão 1 Clicado");
               }}
             />
             <YellowButton
-              content={<div style={{ display: "flex", alignItems: "center" }}>
-              <img src={google} alt="Google" width="30" height="30" />
-            </div>}
+              content={
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <img src={google} alt="Google" width="30vw" height="30vw" />
+                </div>
+              }
               onClick={() => {
                 // Lógica personalizada para o Botão 2
                 console.log("Botão 2 Clicado");
