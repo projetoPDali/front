@@ -6,9 +6,10 @@ import { useNavigate } from "react-router-dom";
 interface YellowButtonProps {
   content: ReactNode; // Conteúdo do botão (pode ser texto, imagem, etc.)
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void; // Função de clique personalizada (opcional)
+  type?: "button" | "submit" | "reset"; // Type attribute for the button (optional)
 }
 
-const YellowButton: React.FC<YellowButtonProps> = ({ content, onClick }) => {
+const YellowButton: React.FC<YellowButtonProps> = ({ content, onClick, type }) => {
   const navigate = useNavigate();
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -20,9 +21,10 @@ const YellowButton: React.FC<YellowButtonProps> = ({ content, onClick }) => {
   };
 
   return (
-    <Button  className="fixed-button-size"
+    <Button
+      type={type || "button"} // Use the provided type or default to "button"
+      className="fixed-button-size"
       style={{
-
         backgroundColor: COLORS.secondary,
         borderColor: COLORS.secondary,
         fontWeight: "bold",
