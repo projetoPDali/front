@@ -5,7 +5,6 @@ import Header from "../Components/Home/Header"; // Import the Header component
 
 
 import CardBike from "../Components/Home/CardBike";
-import Search from "../Components/Home/Search";
 
 
 const Home = () => {
@@ -14,8 +13,6 @@ const Home = () => {
       <MainNavbar />
       
         <Header />
-
-        <Search/>
 
       
      
