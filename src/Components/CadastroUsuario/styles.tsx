@@ -11,6 +11,7 @@ export const styleCol: CSSProperties = {
   flexDirection: "column",
   minHeight: "100vh",
   
+  
 };
 
 export const styleText: CSSProperties = {

@@ -12,7 +12,7 @@ interface UserData {
 export async function cadastrarUser(userData: UserData): Promise<AxiosResponse<any>> {
   try {
     const response = await axios.post(`${API_BASE_URL}/usuario`, userData);
-    return response.data.user.id;
+    return response.data.user;
   } catch (error) {
     throw error;
   }

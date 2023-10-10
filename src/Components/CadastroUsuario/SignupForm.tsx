@@ -1,5 +1,7 @@
-import React, { FormEvent, useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import React, { FormEvent } from "react";
+import { Form } from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // Import the CSS
 import { cadastrarUser } from "../../api/cadastrarUser";
 import { inputStyle } from "./styles";
 import google from "../../assets/google.png";
@@ -22,77 +24,87 @@ const SignupForm = () => {
       phone,
     };
 
-    console.log("User data:", userData);
-
     try {
-      const registeredUser = await cadastrarUser(userData); // Call the function from userApi
+      const registeredUser = await cadastrarUser(userData);
       console.log("User registered:", registeredUser);
+
+      // Show success notification
+      toast.success("User registered successfully!", {
+        position: "top-right",
+        autoClose: 3000, // Close after 3 seconds
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+
       // Handle success or redirection to another page
     } catch (error) {
       console.error("Error registering user:", error);
+
+      // Show error notification
+      toast.error("Error registering user. Please try again later.", {
+        position: "top-right",
+        autoClose: 3000, // Close after 3 seconds
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+
       // Handle error, show an error message, etc.
     }
-  };
-
-  const handleCadastrarButtonClick = () => {
-    // Log that the button was clicked
-    console.log("Cadastrar button clicked");
-
-    // Trigger the form submission when the "Cadastrar" button is clicked
-    const form = document.getElementById("signupForm") as HTMLFormElement;
-    form && form.dispatchEvent(new Event("submit"));
   };
 
   return (
     <div>
       <Form onSubmit={handleFormSubmit}>
         <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
-          <Form.Control type="text" placeholder="Email" style={inputStyle} />
+          <Form.Control type="text" placeholder="Email" name="mail" style={inputStyle} />
         </Form.Group>
-      </Form>
-      <Form>
+
         <Form.Group className="mb-4" controlId="name">
-          <Form.Control type="text" placeholder="Nome" style={inputStyle} />
+          <Form.Control type="text" placeholder="Nome" name="name" style={inputStyle} />
         </Form.Group>
-      </Form>
-      <Form>
+
         <Form.Group className="mb-4" controlId="alias">
-          <Form.Control
-            type="text"
-            placeholder="Nome de Usuário"
-            style={inputStyle}
-          />
+          <Form.Control type="text" placeholder="Nome de Usuário" name="alias" style={inputStyle} />
         </Form.Group>
-      </Form>
-      <Form>
+
         <Form.Group className="mb-4" controlId="phone">
-          <Form.Control type="text" placeholder="Telefone" style={inputStyle} />
+          <Form.Control type="text" placeholder="Telefone" name="phone" style={inputStyle} />
         </Form.Group>
-      </Form>
-      <div style={{ display: "flex", justifyContent: "space-around", alignItems: "center", paddingTop: 20}}>
-      <YellowButton type="submit" content="Cadastrar" />
-      <YellowButton
-        content={
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            alignItems: "center",
+            paddingTop: 20,
+          }}
+        >
+          <YellowButton type="submit" content="Cadastrar" />
+          <YellowButton
+            content={
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <img src={google} alt="Google" width="25vw" height="25vw" />
+              </div>
+            }
+            onClick={() => {
+              // Custom logic for Button 2
+              console.log("Botão 2 Clicado");
             }}
-          >
-            <img src={google} alt="Google" width="25vw" height="25vw" />
-          </div>
-        }
-        onClick={() => {
-          // Lógica personalizada para o Botão 2
-          console.log("Botão 2 Clicado");
-        }}
-      /> 
-      </div>
+          />
+        </div>
+      </Form>
+      <ToastContainer />
     </div>
   );
 };
 
 export default SignupForm;
-
-/* */
