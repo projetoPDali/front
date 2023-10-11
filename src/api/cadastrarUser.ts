@@ -9,11 +9,25 @@ interface UserData {
   phone: string;
 }
 
-export async function cadastrarUser(userData: UserData): Promise<AxiosResponse<any>> {
+export async function cadastrarUser(userData: UserData): Promise<void> {
   try {
     const response = await axios.post(`${API_BASE_URL}/usuario`, userData);
-    return response.data.user;
+
+    if (response.data.error) {
+      const errorDetail = response.data.error;
+
+      if (/Codinome já existe/.test(errorDetail)) {
+        throw new Error("Codinome já existe");
+      } else if (/E-mail já existe/.test(errorDetail)) {
+        throw new Error("E-mail já existe");
+      } else if (/Telefone já existe/.test(errorDetail)) {
+        throw new Error("Telefone já existe");
+      }
+    }
   } catch (error) {
+    console.error("Error:", error);
     throw error;
   }
 }
+
+
