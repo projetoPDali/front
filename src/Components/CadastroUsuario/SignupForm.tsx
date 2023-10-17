@@ -8,6 +8,7 @@ import YellowButton from "../Buttons/YellowBotton";
 const SignupForm: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [showAlert, setShowAlert] = useState(false);
+  const [alertVariant, setAlertVariant] = useState<string | null>(null);
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -25,15 +26,23 @@ const SignupForm: React.FC = () => {
       phone,
     };
 
-    console.log("User data:", userData);
-
     try {
       const registeredUser = await cadastrarUser(userData);
-      console.log("User registered:", registeredUser);
-      // Handle success or redirection to another page
+
+      if (registeredUser !== null) {
+        console.log("User registered:", registeredUser);
+        setError("Usuário cadastrado com sucesso");
+        setAlertVariant("success"); // Define a classe de sucesso
+        setShowAlert(true);
+      } else {
+        setError("Erro ao registrar o usuário");
+        setAlertVariant("danger"); // Define a classe de erro
+        setShowAlert(true);
+      }
     } catch (error: any) {
       console.error("Error registering user:", error);
       setError(error.message);
+      setAlertVariant("danger"); // Define a classe de erro
       setShowAlert(true);
     }
   };
@@ -46,7 +55,7 @@ const SignupForm: React.FC = () => {
     <div>
       <Form onSubmit={handleFormSubmit}>
         {showAlert && (
-          <Alert variant="warning" onClose={handleAlertClose} dismissible>
+          <Alert variant="danger" onClose={handleAlertClose} dismissible>
             {error}
           </Alert>
         )}

@@ -1,7 +1,6 @@
 import React, { MouseEvent, ReactNode } from "react";
-import { Button } from "react-bootstrap";
+import { Alert, Button } from "react-bootstrap";
 import COLORS from "../../constant/colors";
-import { useNavigate } from "react-router-dom";
 
 interface YellowButtonProps {
   content: ReactNode; // Conteúdo do botão (pode ser texto, imagem, etc.)
@@ -10,13 +9,10 @@ interface YellowButtonProps {
 }
 
 const YellowButton: React.FC<YellowButtonProps> = ({ content, onClick, type }) => {
-  const navigate = useNavigate();
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     if (onClick) {
       onClick(event);
-    } else {
-      navigate("/Login");
     }
   };
 

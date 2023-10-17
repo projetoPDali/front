@@ -9,7 +9,7 @@ interface UserData {
   phone: string;
 }
 
-export async function cadastrarUser(userData: UserData): Promise<void> {
+export async function cadastrarUser(userData: UserData): Promise<any> {
   try {
     const response = await axios.post(`${API_BASE_URL}/usuario`, userData);
 
@@ -23,11 +23,16 @@ export async function cadastrarUser(userData: UserData): Promise<void> {
       } else if (/Telefone já existe/.test(errorDetail)) {
         throw new Error("Telefone já existe");
       }
+      
+      return null; // Não há dados do usuário, portanto, retorne null
+    } else {
+      // Os dados cadastrados estão no corpo da resposta
+      const userDataFromResponse = response.data;
+      console.log("Usuário cadastrado com sucesso:", userDataFromResponse);
+      return userDataFromResponse; // Retorne os dados do usuário
     }
   } catch (error) {
     console.error("Error:", error);
     throw error;
   }
 }
-
-

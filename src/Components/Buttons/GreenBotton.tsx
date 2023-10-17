@@ -19,7 +19,7 @@ const GreenBotton = () => {
           marginLeft: "10vw",
           boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.4)",
         }}
-       onClick={() => navigate("/Login")}
+       onClick={() => navigate("/cadastro-user")}
       >
         CADASTRE-SE
       </Button>

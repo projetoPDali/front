@@ -3,7 +3,7 @@ import Signup from "../Components/CadastroUsuario/Signup";
 import MainNavbar from "../Components/Navbar/Navbar";
 
 
-const Login = () => {
+const CadastroUser = () => {
   return (
     <div>
       <MainNavbar />
@@ -12,4 +12,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default CadastroUser;
