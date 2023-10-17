@@ -4,6 +4,8 @@ import * as styles from "./styles"; // Importe os estilos
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import { Col, Row } from "react-bootstrap";
+import COLORS from "../../constant/colors";
 
 const buttonsData = [
   { label: "Material", actions: ["Carbono", "Alumínio"] },
@@ -22,9 +24,10 @@ const buttonsData = [
 
 const Search = () => {
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    <Row style={{ display: "flex", justifyContent: "center" }}>
       {buttonsData.map((button, index) => (
-        <DropdownButton
+        <Col style={{padding: 0,  display: "flex",justifyContent: 'space-around', alignContent: 'space-around', backgroundColor: COLORS.primary}}>
+        <DropdownButton style={{color: COLORS.white}}
           as={ButtonGroup}
           key={index}
           id={`dropdown-variants-${button.label}`}
@@ -37,9 +40,12 @@ const Search = () => {
             </Dropdown.Item>
           ))}
         </DropdownButton>
+        </Col>
       ))}
-    </div>
+    </Row>
   );
 };
 
 export default Search;
+
+
