@@ -2,31 +2,7 @@ import React from "react";
 import { Row, Col, Form } from "react-bootstrap";
 import COLORS from "../../constant/colors";
 
-interface BikeData {
-  title: string;
-  brand: string;
-  rim: string;
-  frameSize: string;
-  material: string;
-  suspension: string;
-  gear: string;
-  gender: string;
-  description: string;
-  hourlyvalue: string;
-  dailyvalue: string;
-}
-
-interface FormBikeProps {
-  bikeData: BikeData;
-  setBikeData: React.Dispatch<React.SetStateAction<BikeData>>;
-}
-
-const FormBike: React.FC<FormBikeProps> = ({ bikeData, setBikeData }) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setBikeData({ ...bikeData, [name]: value });
-  };
-
+const FormBike = () => {
   const inputStyle = {
     borderColor: COLORS.gray,
   };
@@ -61,7 +37,6 @@ const FormBike: React.FC<FormBikeProps> = ({ bikeData, setBikeData }) => {
               name="title"
               placeholder="Titulo"
               style={inputStyle}
-              onChange={handleChange}
             />
           </Form.Group>
           <Form.Group className="mb-4" controlId="exampleForm.ControlInput2">
@@ -70,7 +45,6 @@ const FormBike: React.FC<FormBikeProps> = ({ bikeData, setBikeData }) => {
               name="brand"
               placeholder="Marca"
               style={inputStyle}
-              onChange={handleChange}
             />
           </Form.Group>
           <Col xs={5}>
@@ -80,7 +54,6 @@ const FormBike: React.FC<FormBikeProps> = ({ bikeData, setBikeData }) => {
                 name="rim"
                 placeholder="Aro"
                 style={inputStyle}
-                onChange={handleChange}
               />
             </Form.Group>
           </Col>
@@ -91,7 +64,6 @@ const FormBike: React.FC<FormBikeProps> = ({ bikeData, setBikeData }) => {
                 name="frameSize"
                 placeholder="Tamanho do quadro"
                 style={inputStyle}
-                onChange={handleChange}
               />
             </Form.Group>
           </Col>
@@ -101,7 +73,6 @@ const FormBike: React.FC<FormBikeProps> = ({ bikeData, setBikeData }) => {
               name="material"
               placeholder="Material"
               style={inputStyle}
-              onChange={handleChange}
             />
           </Form.Group>
           <Col xs={5}>
@@ -111,7 +82,6 @@ const FormBike: React.FC<FormBikeProps> = ({ bikeData, setBikeData }) => {
                 name="suspension"
                 placeholder="Suspensão"
                 style={inputStyle}
-                onChange={handleChange}
               />
             </Form.Group>
           </Col>
@@ -122,7 +92,6 @@ const FormBike: React.FC<FormBikeProps> = ({ bikeData, setBikeData }) => {
                 name="gear"
                 placeholder="Marcha"
                 style={inputStyle}
-                onChange={handleChange}
               />
             </Form.Group>
           </Col>
@@ -132,7 +101,6 @@ const FormBike: React.FC<FormBikeProps> = ({ bikeData, setBikeData }) => {
               name="gender"
               placeholder="Gênero"
               style={inputStyle}
-              onChange={handleChange}
             />
           </Form.Group>
         </Row>
@@ -144,7 +112,6 @@ const FormBike: React.FC<FormBikeProps> = ({ bikeData, setBikeData }) => {
             rows={3}
             name="description"
             style={inputStyle}
-            onChange={handleChange}
           />
         </Form.Group>
       </Form>

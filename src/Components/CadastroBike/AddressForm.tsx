@@ -1,26 +1,13 @@
 import React from "react";
-import { Row, Col, Form } from "react-bootstrap";
+import { Row, Col, Form, Button } from "react-bootstrap";
 import COLORS from "../../constant/colors";
 
-interface AddressData {
-  cep: string;
-  state: string;
-  city: string;
-  neighborhood: string;
-  street: string;
-  number: string;
-}
 
-interface FormAddressProps {
-  addressData: AddressData;
-  setAddressData: React.Dispatch<React.SetStateAction<AddressData>>;
-}
 
-const FormAddress: React.FC<FormAddressProps> = ({ addressData, setAddressData }) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setAddressData({ ...addressData, [name]: value });
-  };
+
+
+const FormAddress = () => {
+ 
 
   const inputStyle = {
     borderColor: COLORS.gray,
@@ -56,7 +43,7 @@ const FormAddress: React.FC<FormAddressProps> = ({ addressData, setAddressData }
               name="cep"
               placeholder="Cep"
               style={inputStyle}
-              onChange={handleChange}
+             
             />
           </Form.Group>
           <Col xs={5}>
@@ -66,7 +53,7 @@ const FormAddress: React.FC<FormAddressProps> = ({ addressData, setAddressData }
                 name="state"
                 placeholder="Estado"
                 style={inputStyle}
-                onChange={handleChange}
+                
               />
             </Form.Group>
           </Col>
@@ -77,7 +64,7 @@ const FormAddress: React.FC<FormAddressProps> = ({ addressData, setAddressData }
                 name="city"
                 placeholder="Cidade"
                 style={inputStyle}
-                onChange={handleChange}
+              
               />
             </Form.Group>
           </Col>
@@ -87,7 +74,7 @@ const FormAddress: React.FC<FormAddressProps> = ({ addressData, setAddressData }
               name="neighborhood"
               placeholder="Bairro"
               style={inputStyle}
-              onChange={handleChange}
+              
             />
           </Form.Group>
           <Col xs={8}>
@@ -97,7 +84,7 @@ const FormAddress: React.FC<FormAddressProps> = ({ addressData, setAddressData }
                 name="street"
                 placeholder="Rua"
                 style={inputStyle}
-                onChange={handleChange}
+                
               />
             </Form.Group>
           </Col>
@@ -108,8 +95,8 @@ const FormAddress: React.FC<FormAddressProps> = ({ addressData, setAddressData }
                 name="number"
                 placeholder="N°"
                 style={inputStyle}
-                onChange={handleChange}
               />
+              <Button>Mostrar</Button>
             </Form.Group>
           </Col>
         </Row>
