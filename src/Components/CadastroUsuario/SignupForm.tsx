@@ -4,6 +4,7 @@ import { cadastrarUser } from "../../api/cadastrarUser";
 import { inputStyle } from "./styles";
 import google from "../../assets/google.png";
 import YellowButton from "../Buttons/YellowBotton";
+import GoogleLogin from 'react-google-login';
 
 const SignupForm: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
@@ -51,6 +52,11 @@ const SignupForm: React.FC = () => {
     setShowAlert(false);
   };
 
+  const responseGoogle = (response: any) => {
+    // Implemente a lógica aqui para lidar com a resposta do Google Login
+    console.log(response);
+  };
+
   return (
     <div>
       <Form onSubmit={handleFormSubmit}>
@@ -85,22 +91,22 @@ const SignupForm: React.FC = () => {
           }}
         >
           <YellowButton type="submit" content="Cadastrar" />
-          <YellowButton
-            content={
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <img src={google} alt="Google" width="25vw" height="25vw" />
-              </div>
-            }
-            onClick={() => {
-              console.log("Botão 2 Clicado");
-            }}
-          />
+          <GoogleLogin
+  clientId="977680160090-qgos9d3eqrsu68ptnbl5q096cq8pvopj.apps.googleusercontent.com"
+  buttonText="Continuar com o Google"
+  onSuccess={responseGoogle}
+  onFailure={responseGoogle}
+  cookiePolicy={'single_host_origin'}
+  render={renderProps => (
+    <button
+      onClick={renderProps.onClick}
+      disabled={renderProps.disabled}
+      className="YellowButton" // Adicione a classe de estilo que você deseja
+    >
+      Personalizado
+    </button>
+  )}
+/>
         </div>
       </Form>
     </div>
