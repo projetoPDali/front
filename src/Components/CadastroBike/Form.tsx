@@ -1,16 +1,89 @@
-import React from "react";
-import { Row, Col, Form } from "react-bootstrap";
+import React, { useState } from "react";
+import { Form, Col, Row } from "react-bootstrap";
 import COLORS from "../../constant/colors";
 
-const FormBike = () => {
-  const inputStyle = {
+interface FormData {
+  title: string;
+  brand: { name: string };
+  rim: string;
+  size: string;
+  material: { name: string };
+  suspension: boolean;
+  gear: string;
+  gender: { name: string };
+  hourlyvalue: string;
+  dailyvalue: string;
+  description: string;
+}
+
+interface FormBikeProps {
+  onSaveData: (formData: FormData) => void;
+}
+
+const FormBike: React.FC<FormBikeProps> = ({ onSaveData }) => {
+  const [formData, setFormData] = useState<FormData>({
+    title: "",
+    brand: { name: "" },
+    rim: "",
+    size: "",
+    material: { name: "" },
+    suspension: false,
+    gear: "",
+    gender: { name: "" },
+    hourlyvalue: "",
+    dailyvalue: "",
+    description: "",
+  });
+
+  const inputStyle: React.CSSProperties = {
     borderColor: COLORS.gray,
   };
 
-  const lineStyle = {
+  const lineStyle: React.CSSProperties = {
     backgroundColor: COLORS.primary,
     height: "2px",
     width: "4vw",
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const { name, value } = e.target;
+
+    if (name === "suspension") {
+      const isSuspension = value === "sim";
+      setFormData({
+        ...formData,
+        suspension: isSuspension,
+      });
+    } else if (name === "gender") {
+      const genderValue =
+        value === "feminino"
+          ? { name: "feminino" }
+          : value === "masculino"
+          ? { name: "masculino" }
+          : { name: "unissex" };
+      setFormData({
+        ...formData,
+        gender: genderValue,
+      });
+    } else if (name === "brand" || name === "material") {
+      const nameValue = { name: value };
+      setFormData({
+        ...formData,
+        [name]: nameValue,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
+
+    // Envie os dados sempre que houver uma alteração
+    onSaveData(formData);
   };
 
   return (
@@ -31,78 +104,129 @@ const FormBike = () => {
       </div>
       <Form style={{ padding: 20 }}>
         <Row>
-          <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
+          <Form.Group className="mb-4">
             <Form.Control
               type="text"
               name="title"
-              placeholder="Titulo"
+              placeholder="Título"
               style={inputStyle}
+              value={formData.title}
+              onChange={handleChange}
             />
           </Form.Group>
-          <Form.Group className="mb-4" controlId="exampleForm.ControlInput2">
+          <Form.Group className="mb-4">
             <Form.Control
               type="text"
               name="brand"
               placeholder="Marca"
               style={inputStyle}
+              value={formData.brand.name}
+              onChange={handleChange}
             />
           </Form.Group>
           <Col xs={5}>
-            <Form.Group className="mb-4" controlId="aro">
+            <Form.Group className="mb-4">
               <Form.Control
                 type="text"
                 name="rim"
                 placeholder="Aro"
                 style={inputStyle}
+                value={formData.rim}
+                onChange={handleChange}
               />
             </Form.Group>
           </Col>
           <Col xs={7}>
-            <Form.Group className="mb-4" controlId="tamanhoQuadro">
+            <Form.Group className="mb-4">
               <Form.Control
                 type="text"
-                name="frameSize"
+                name="size"
                 placeholder="Tamanho do quadro"
                 style={inputStyle}
+                value={formData.size}
+                onChange={handleChange}
               />
             </Form.Group>
           </Col>
           <Form.Group className="mb-4" controlId="exampleForm.ControlInput3">
             <Form.Control
-              type="text"
+              as="select"
               name="material"
-              placeholder="Material"
               style={inputStyle}
-            />
+              value={formData.material.name}
+              onChange={handleChange}
+            >
+              <option value="">Selecione o Material</option>
+              <option value="aço">Aço</option>
+              <option value="fibra de carbono">Fibra de carbono</option>
+              <option value="alumínio">Alumínio</option>
+              <option value="outro">Outro</option>
+            </Form.Control>
           </Form.Group>
           <Col xs={5}>
-            <Form.Group className="mb-4" controlId="marca">
+            <Form.Group className="mb-4" controlId="exampleForm.ControlInput4">
               <Form.Control
-                type="text"
+                as="select"
                 name="suspension"
-                placeholder="Suspensão"
                 style={inputStyle}
-              />
+                value={formData.suspension ? "sim" : "nao"}
+                onChange={handleChange}
+              >
+                <option value="nao">Não</option>
+                <option value="sim">Sim</option>
+              </Form.Control>
             </Form.Group>
           </Col>
           <Col xs={7}>
-            <Form.Group className="mb-4" controlId="marcha">
+            <Form.Group className="mb-4">
               <Form.Control
                 type="text"
                 name="gear"
                 placeholder="Marcha"
                 style={inputStyle}
+                value={formData.gear}
+                onChange={handleChange}
               />
             </Form.Group>
           </Col>
-          <Form.Group className="mb-4" controlId="exampleForm.ControlInput4">
+          <Form.Group className="mb-4">
             <Form.Control
-              type="text"
+              as="select"
               name="gender"
-              placeholder="Gênero"
               style={inputStyle}
-            />
+              value={formData.gender.name}
+              onChange={handleChange}
+            >
+              <option value="">Selecione o Gênero</option>
+              <option value="feminino">Feminino</option>
+              <option value="masculino">Masculino</option>
+              <option value="unissex">Unissex</option>
+            </Form.Control>
           </Form.Group>
+          <Col xs={6}>
+            <Form.Group className="mb-4">
+              <Form.Control
+                type="text"
+                name="hourlyvalue"
+                placeholder="Preço por Hora"
+                style={inputStyle}
+                value={formData.hourlyvalue}
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Col>
+          <Col xs={6}>
+            <Form.Group className="mb-4">
+              <Form.Control
+                type="text"
+                name="dailyvalue"
+                placeholder="Preço por dia"
+                style={inputStyle}
+                value={formData.dailyvalue}
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Col>
         </Row>
 
         <Form.Group className="mb-4" controlId="descricao">
@@ -112,6 +236,9 @@ const FormBike = () => {
             rows={3}
             name="description"
             style={inputStyle}
+            value={formData.description}
+            onChange={handleChange}
+            onBlur={handleChange} // Adicione o evento onBlur
           />
         </Form.Group>
       </Form>

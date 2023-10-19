@@ -1,22 +1,50 @@
-import React from "react";
-import { Row, Col, Form, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Form, Col, Row } from "react-bootstrap";
 import COLORS from "../../constant/colors";
 
+interface AddressData {
+  cep: string;
+  state: string;
+  city: string;
+  neighborhood: string;
+  street: string;
+  number: string;
+}
 
+interface FormAddressProps {
+  onSaveAddress: (addressData: AddressData) => void;
+}
 
+const FormAddress: React.FC<FormAddressProps> = ({ onSaveAddress }) => {
+  const [addressData, setAddressData] = useState<AddressData>({
+    cep: "",
+    state: "",
+    city: "",
+    neighborhood: "",
+    street: "",
+    number: "",
+  });
 
-
-const FormAddress = () => {
- 
-
-  const inputStyle = {
+  const inputStyle: React.CSSProperties = {
     borderColor: COLORS.gray,
   };
 
-  const lineStyle = {
+  const lineStyle: React.CSSProperties = {
     backgroundColor: COLORS.primary,
     height: "2px",
     width: "4vw",
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { name, value } = e.target;
+    setAddressData({
+      ...addressData,
+      [name]: value,
+    });
+
+    onSaveAddress(addressData);
   };
 
   return (
@@ -43,7 +71,8 @@ const FormAddress = () => {
               name="cep"
               placeholder="Cep"
               style={inputStyle}
-             
+              value={addressData.cep}
+              onChange={handleChange}
             />
           </Form.Group>
           <Col xs={5}>
@@ -53,7 +82,8 @@ const FormAddress = () => {
                 name="state"
                 placeholder="Estado"
                 style={inputStyle}
-                
+                value={addressData.state}
+                onChange={handleChange}
               />
             </Form.Group>
           </Col>
@@ -64,7 +94,8 @@ const FormAddress = () => {
                 name="city"
                 placeholder="Cidade"
                 style={inputStyle}
-              
+                value={addressData.city}
+                onChange={handleChange}
               />
             </Form.Group>
           </Col>
@@ -74,7 +105,8 @@ const FormAddress = () => {
               name="neighborhood"
               placeholder="Bairro"
               style={inputStyle}
-              
+              value={addressData.neighborhood}
+              onChange={handleChange}
             />
           </Form.Group>
           <Col xs={8}>
@@ -84,7 +116,8 @@ const FormAddress = () => {
                 name="street"
                 placeholder="Rua"
                 style={inputStyle}
-                
+                value={addressData.street}
+                onChange={handleChange}
               />
             </Form.Group>
           </Col>
@@ -95,8 +128,9 @@ const FormAddress = () => {
                 name="number"
                 placeholder="N°"
                 style={inputStyle}
+                value={addressData.number}
+                onChange={handleChange}
               />
-              <Button>Mostrar</Button>
             </Form.Group>
           </Col>
         </Row>
