@@ -72,11 +72,12 @@ const CadastroBike: React.FC = () => {
       description: bikeData.description,
       hourlyvalue: bikeData.hourlyvalue,
       dailyvalue: bikeData.dailyvalue,
-      user: 1, // Você pode definir o valor do usuário aqui
+      user: 2,
       brand: bikeData.brand,
       material: bikeData.material,
       address: addressData,
-    }; console.log(userData)
+    };
+    console.log(userData);
 
     // Chame a função de envio para o backend
     cadastrarBike(userData)
@@ -96,7 +97,12 @@ const CadastroBike: React.FC = () => {
           <Col
             md={5}
             className="d-none d-md-block"
-            style={{ backgroundColor: COLORS.primary, position: "sticky", top: 0, height: "100vh" }}
+            style={{
+              backgroundColor: COLORS.primary,
+              position: "sticky",
+              top: 0,
+              height: "100vh",
+            }}
           >
             <img
               src={Imagem}
@@ -105,7 +111,15 @@ const CadastroBike: React.FC = () => {
             />
           </Col>
 
-          <Col xs={12} md={7} style={{ backgroundColor: COLORS.lightGray, overflowY: "scroll", height: "100vh" }}>
+          <Col
+            xs={12}
+            md={7}
+            style={{
+              backgroundColor: COLORS.lightGray,
+              overflowY: "scroll",
+              height: "100vh",
+            }}
+          >
             <FormBike onSaveData={handleSaveBikeData} />
             <FormAddress onSaveAddress={handleSaveAddressData} />
             <Button onClick={handleSaveData}>Salvar</Button>

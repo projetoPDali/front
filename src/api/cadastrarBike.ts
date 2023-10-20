@@ -11,7 +11,7 @@ interface BikeData {
   description: string;
   hourlyvalue: string;
   dailyvalue: string;
-  user: number; // Certifique-se de definir o ID do usuário corretamente
+  user: number; 
   brand: { name: string };
   material: { name: string };
   address: {
@@ -26,7 +26,23 @@ interface BikeData {
 
 export async function cadastrarBike(bikeData: BikeData): Promise<any> {
   try {
-    const response = await axios.post(`${API_BASE_URL}/bike`, bikeData);
+    // Converte o campo 'cep' de string para número e remove caracteres especiais
+    const cepNumber = Number(bikeData.address.cep.replace(/\D/g, ''));
+
+    // Converte o campo 'number' de string para número
+    const number = Number(bikeData.address.number);
+
+    // Cria uma nova instância de bikeData com os campos atualizados
+    const updatedBikeData = {
+      ...bikeData,
+      address: {
+        ...bikeData.address,
+        cep: cepNumber,
+        number: number,
+      },
+    };
+
+    const response = await axios.post(`${API_BASE_URL}/bike`, updatedBikeData);
 
     if (response.data.error) {
       // Lida com erros específicos, se necessário
