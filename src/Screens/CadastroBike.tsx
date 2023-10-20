@@ -76,7 +76,7 @@ const CadastroBike: React.FC = () => {
       brand: bikeData.brand,
       material: bikeData.material,
       address: addressData,
-    };
+    }; console.log(userData)
 
     // Chame a função de envio para o backend
     cadastrarBike(userData)
