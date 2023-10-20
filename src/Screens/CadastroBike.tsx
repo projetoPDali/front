@@ -1,30 +1,35 @@
-import { Container, Row, Col, Form } from 'react-bootstrap';
-
+import { Container, Row, Col } from "react-bootstrap";
+import FormBike from "../Components/CadastroBike/Form";
+import Imagem from "../assets/ciclista-amarelo.png";
+import COLORS from "../constant/colors";
+import MainNavbar from "../Components/Navbar/Navbar";
 
 const CadastroBike = () => {
   return (
-    <Container>
-    <Row>
-      {/* Coluna para a imagem (será ocultada em telas menores) */}
-      <Col md={5} className="d-none d-md-block">
-        <div>teste</div>
-      </Col>
+    <div>
+      <MainNavbar />
+      <Container fluid>
+        <Row>
+          <Col
+            md={5}
+            className="d-none d-md-block"
+            style={{ backgroundColor: COLORS.primary, position: "sticky", top: 0, height: "100vh" }}
+          >
+            <img
+              src={Imagem}
+              className="img-fluid align-center h-100"
+              alt="Ciclista amarelo"
+            />
+          </Col>
 
-      
-      <Col xs={12} md={7}>
-      <Form>
-      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-        <Form.Control type="email" placeholder="name@example.com" />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-        <Form.Label>Example textarea</Form.Label>
-        <Form.Control as="textarea" rows={3} />
-      </Form.Group>
-    </Form>
-      </Col>
-    </Row>
-  </Container>
-  )
+          <Col xs={12} md={7} style={{ backgroundColor: COLORS.lightGray, overflowY: "scroll", height: "100vh" }}>
+            <FormBike />
+            <FormBike />
+          </Col>
+        </Row>
+      </Container>
+    </div>
+  );
 };
 
 export default CadastroBike;
