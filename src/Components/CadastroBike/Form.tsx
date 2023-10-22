@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Col, Row } from "react-bootstrap";
+import { Form, Col, Row, Button } from "react-bootstrap";
 import COLORS from "../../constant/colors";
 
 interface FormData {
@@ -87,7 +87,7 @@ const FormBike: React.FC<FormBikeProps> = ({ onSaveData }) => {
   };
 
   return (
-    <div>
+    <div className="col-10 mx-auto d-block">
       <div
         style={{
           marginTop: "3vw",
@@ -172,8 +172,8 @@ const FormBike: React.FC<FormBikeProps> = ({ onSaveData }) => {
                 value={formData.suspension ? "sim" : "nao"}
                 onChange={handleChange}
               >
-                <option value="nao">Não</option>
-                <option value="sim">Sim</option>
+                <option value="nao">Não tem Suspensão</option>
+                <option value="sim">Tem Suspensão</option>
               </Form.Control>
             </Form.Group>
           </Col>
@@ -202,6 +202,7 @@ const FormBike: React.FC<FormBikeProps> = ({ onSaveData }) => {
               <option value="masculino">Masculino</option>
               <option value="unissex">Unissex</option>
             </Form.Control>
+            <p style={{ margin: 0 }}>Referente ao formato do banco</p>
           </Form.Group>
           <Col xs={6}>
             <Form.Group className="mb-4">
@@ -227,20 +228,20 @@ const FormBike: React.FC<FormBikeProps> = ({ onSaveData }) => {
               />
             </Form.Group>
           </Col>
+          <Form.Group className="mb-4" controlId="descricao">
+            <Form.Label>Descrição:</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              name="description"
+              style={inputStyle}
+              value={formData.description}
+              onChange={handleChange}
+              onBlur={handleChange} // Adicione o evento onBlur
+            />
+          </Form.Group>
+          
         </Row>
-
-        <Form.Group className="mb-4" controlId="descricao">
-          <Form.Label>Descrição:</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={3}
-            name="description"
-            style={inputStyle}
-            value={formData.description}
-            onChange={handleChange}
-            onBlur={handleChange} // Adicione o evento onBlur
-          />
-        </Form.Group>
       </Form>
     </div>
   );

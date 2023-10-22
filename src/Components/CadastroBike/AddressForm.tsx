@@ -48,7 +48,7 @@ const FormAddress: React.FC<FormAddressProps> = ({ onSaveAddress }) => {
   };
 
   return (
-    <div>
+    <div className="col-10 mx-auto d-block">
       <div
         style={{
           marginTop: "3vw",

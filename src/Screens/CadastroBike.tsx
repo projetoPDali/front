@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import FormBike from "../Components/CadastroBike/Form";
 import FormAddress from "../Components/CadastroBike/AddressForm";
 import Imagem from "../assets/ciclista-amarelo.png";
 import COLORS from "../constant/colors";
 import MainNavbar from "../Components/Navbar/Navbar";
 import { cadastrarBike } from "../api/cadastrarBike"; // Importe a função de envio para o backend
+import BotaoUplaod from "../Components/CadastroBike/BotaoUpload";
+import FileUploadComponent from "../Components/CadastroBike/BotaoUpload";
 
 interface BikeData {
   title: string;
@@ -62,6 +64,9 @@ const CadastroBike: React.FC = () => {
     setAddressData(formData);
   };
 
+  const [mostrarBotaoUpload, setMostrarBotaoUpload] = useState(false);
+
+
   const handleSaveData = () => {
     const userData = {
       size: bikeData.size,
@@ -72,18 +77,24 @@ const CadastroBike: React.FC = () => {
       description: bikeData.description,
       hourlyvalue: bikeData.hourlyvalue,
       dailyvalue: bikeData.dailyvalue,
-      user: 2,
+      user: 1,
       brand: bikeData.brand,
       material: bikeData.material,
       address: addressData,
     };
     console.log(userData);
 
-    // Chame a função de envio para o backend
     cadastrarBike(userData)
-      .then((responseData) => {
-        // Lida com a resposta do backend, se necessário
-      })
+    cadastrarBike(userData)
+    .then((responseData) => {
+      // Cadastro bem-sucedido, agora defina mostrarBotaoUpload como verdadeiro e role até o BotaoUpload
+      setMostrarBotaoUpload(true);
+
+      const botaoUploadElement = document.getElementById("BotaoUpload");
+      if (botaoUploadElement) {
+        botaoUploadElement.scrollIntoView({ behavior: "smooth" });
+      }
+    })
       .catch((error) => {
         // Lida com erros, se necessário
       });
@@ -111,19 +122,30 @@ const CadastroBike: React.FC = () => {
             />
           </Col>
 
-          <Col
-            xs={12}
-            md={7}
+          <Col xs={12} md={7} style={{ backgroundColor: COLORS.lightGray, overflowY: "scroll", height: "100vh" }}>
+            <FileUploadComponent/>
+          <FormBike onSaveData={handleSaveBikeData} />
+          <FormAddress onSaveAddress={handleSaveAddressData} />
+          <Button
             style={{
-              backgroundColor: COLORS.lightGray,
-              overflowY: "scroll",
-              height: "100vh",
+              backgroundColor: COLORS.primary,
+              borderColor: COLORS.primary,
+              fontWeight: "bold",
+              marginBottom: 30
             }}
+            className="col-3 mx-auto d-block"
+            onClick={handleSaveData}
           >
-            <FormBike onSaveData={handleSaveBikeData} />
-            <FormAddress onSaveAddress={handleSaveAddressData} />
-            <Button onClick={handleSaveData}>Salvar</Button>
-          </Col>
+            Salvar
+          </Button>
+          
+          {mostrarBotaoUpload && (
+            <div id="BotaoUpload">
+              <BotaoUplaod />
+            </div>
+          )}
+
+        </Col>
         </Row>
       </Container>
     </div>
