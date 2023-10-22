@@ -4,19 +4,26 @@ import COLORS from "../../constant/colors";
 import React, { useState } from "react";
 import axios from "axios";
 
-const BotaoUpload = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
+interface BotaoUploadProps {
+  bikeId: number; // Defina o tipo da prop bikeId como number
+}
 
-  const handleFileChange = (e: any) => {
-    setSelectedFile(e.target.files[0]);
+const BotaoUpload: React.FC<BotaoUploadProps> = ({ bikeId }) => {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null); // Defina o tipo do estado
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setSelectedFile(e.target.files[0]);
+    }
   };
 
   const handleUpload = async () => {
     if (selectedFile) {
       const formData = new FormData();
       formData.append("file", selectedFile);
-
+      formData.append("idbike", bikeId.toString());
       try {
+        console.log("id que esta sendo enviado",bikeId)
         // Replace with your backend API endpoint
         const response = await axios.post(
           "http://localhost:3001/foto",
@@ -65,7 +72,7 @@ const BotaoUpload = () => {
       </div>
       <Form style={{ padding: 20 }}>
         <Row>
-          <Col xs={8}>
+          <Col xs={9}>
             <Form.Group className="mb-4" controlId="rua">
               <Form.Control
                 type="file"
@@ -75,7 +82,7 @@ const BotaoUpload = () => {
               />
             </Form.Group>
           </Col>
-          <Col xs={4}>
+          <Col xs={3}>
             <Button
               className="col-12"
               style={{

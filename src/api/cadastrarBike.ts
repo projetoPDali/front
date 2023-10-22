@@ -63,7 +63,7 @@ export async function cadastrarBike(bikeData: BikeData): Promise<any> {
     } else {
       // Os dados da bicicleta cadastrada estão no corpo da resposta
       const bikeDataFromResponse = response.data;
-      console.log("Bicicleta cadastrada com sucesso:");
+      console.log("Bicicleta cadastrada com sucesso:", bikeDataFromResponse );
       return bikeDataFromResponse; // Retorne os dados da bicicleta
     }
   } catch (error) {

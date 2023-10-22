@@ -6,8 +6,7 @@ import Imagem from "../assets/ciclista-amarelo.png";
 import COLORS from "../constant/colors";
 import MainNavbar from "../Components/Navbar/Navbar";
 import { cadastrarBike } from "../api/cadastrarBike"; // Importe a função de envio para o backend
-import BotaoUplaod from "../Components/CadastroBike/BotaoUpload";
-import FileUploadComponent from "../Components/CadastroBike/BotaoUpload";
+import BotaoUpload from "../Components/CadastroBike/BotaoUpload";
 
 interface BikeData {
   title: string;
@@ -66,6 +65,8 @@ const CadastroBike: React.FC = () => {
 
   const [mostrarBotaoUpload, setMostrarBotaoUpload] = useState(false);
 
+  // Defina uma variável de estado para armazenar o bikeId
+  const [bikeId, setBikeId] = useState<number | null>(null);
 
   const handleSaveData = () => {
     const userData = {
@@ -82,19 +83,30 @@ const CadastroBike: React.FC = () => {
       material: bikeData.material,
       address: addressData,
     };
-    console.log(userData);
 
     cadastrarBike(userData)
-    cadastrarBike(userData)
-    .then((responseData) => {
-      // Cadastro bem-sucedido, agora defina mostrarBotaoUpload como verdadeiro e role até o BotaoUpload
-      setMostrarBotaoUpload(true);
+      .then((responseData) => {
+        if (responseData) {
+          console.log(responseData.id);
+          // Cadastro bem-sucedido, agora defina o bikeId com o ID retornado
+          const bikeId = responseData.id;
 
-      const botaoUploadElement = document.getElementById("BotaoUpload");
-      if (botaoUploadElement) {
-        botaoUploadElement.scrollIntoView({ behavior: "smooth" });
-      }
-    })
+          // Defina mostrarBotaoUpload como verdadeiro e role até o BotaoUpload
+          setMostrarBotaoUpload(true);
+
+          const botaoUploadElement = document.getElementById("BotaoUpload");
+          if (botaoUploadElement) {
+            botaoUploadElement.scrollIntoView({ behavior: "smooth" });
+          }
+
+          // Agora passe o bikeId para o BotaoUpload
+          setBikeId(bikeId);
+          console.log(responseData);
+          console.log(bikeId);
+        } else {
+          // Lidar com erros, se necessário
+        }
+      })
       .catch((error) => {
         // Lida com erros, se necessário
       });
@@ -122,30 +134,36 @@ const CadastroBike: React.FC = () => {
             />
           </Col>
 
-          <Col xs={12} md={7} style={{ backgroundColor: COLORS.lightGray, overflowY: "scroll", height: "100vh" }}>
-            <FileUploadComponent/>
-          <FormBike onSaveData={handleSaveBikeData} />
-          <FormAddress onSaveAddress={handleSaveAddressData} />
-          <Button
+          <Col
+            xs={12}
+            md={7}
             style={{
-              backgroundColor: COLORS.primary,
-              borderColor: COLORS.primary,
-              fontWeight: "bold",
-              marginBottom: 30
+              backgroundColor: COLORS.lightGray,
+              overflowY: "scroll",
+              height: "100vh",
             }}
-            className="col-3 mx-auto d-block"
-            onClick={handleSaveData}
           >
-            Salvar
-          </Button>
-          
-          {mostrarBotaoUpload && (
-            <div id="BotaoUpload">
-              <BotaoUplaod />
-            </div>
-          )}
+            <FormBike onSaveData={handleSaveBikeData} />
+            <FormAddress onSaveAddress={handleSaveAddressData} />
+            <Button
+              style={{
+                backgroundColor: COLORS.primary,
+                borderColor: COLORS.primary,
+                fontWeight: "bold",
+                marginBottom: 30,
+              }}
+              className="col-3 mx-auto d-block"
+              onClick={handleSaveData}
+            >
+              Salvar
+            </Button>
 
-        </Col>
+            {mostrarBotaoUpload && (
+              <div id="BotaoUpload">
+                {bikeId !== null && <BotaoUpload bikeId={bikeId} />}
+              </div>
+            )}
+          </Col>
         </Row>
       </Container>
     </div>
