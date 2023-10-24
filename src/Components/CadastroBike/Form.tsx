@@ -3,8 +3,7 @@ import { Form, Col, Row,} from "react-bootstrap";
 import COLORS from "../../constant/colors";
 
 interface FormData {
-  title: string;
-  brand: { name: string };
+    brand: { name: string };
   rim: string;
   size: string;
   material: { name: string };
@@ -22,8 +21,7 @@ interface FormBikeProps {
 
 const FormBike: React.FC<FormBikeProps> = ({ onSaveData }) => {
   const [formData, setFormData] = useState<FormData>({
-    title: "",
-    brand: { name: "" },
+       brand: { name: "" },
     rim: "",
     size: "",
     material: { name: "" },
@@ -104,16 +102,7 @@ const FormBike: React.FC<FormBikeProps> = ({ onSaveData }) => {
       </div>
       <Form style={{ padding: 20 }}>
         <Row>
-          <Form.Group className="mb-4">
-            <Form.Control
-              type="text"
-              name="title"
-              placeholder="Título"
-              style={inputStyle}
-              value={formData.title}
-              onChange={handleChange}
-            />
-          </Form.Group>
+         
           <Form.Group className="mb-4">
             <Form.Control
               type="text"

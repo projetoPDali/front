@@ -9,7 +9,7 @@ import { cadastrarBike } from "../api/cadastrarBike"; // Importe a função de e
 import BotaoUpload from "../Components/CadastroBike/BotaoUpload";
 
 interface BikeData {
-  title: string;
+ 
   brand: { name: string };
   rim: string;
   size: string;
@@ -33,7 +33,7 @@ interface AddressData {
 
 const CadastroBike: React.FC = () => {
   const [bikeData, setBikeData] = useState<BikeData>({
-    title: "",
+   
     brand: { name: "" },
     rim: "",
     size: "",
