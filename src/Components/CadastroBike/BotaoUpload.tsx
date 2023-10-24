@@ -5,10 +5,10 @@ import React, { useState } from "react";
 import axios from "axios";
 
 interface BotaoUploadProps {
-  bikeId: number; // Defina o tipo da prop bikeId como number
+  idbike: number; // Defina o tipo da prop bikeId como number
 }
 
-const BotaoUpload: React.FC<BotaoUploadProps> = ({ bikeId }) => {
+const BotaoUpload: React.FC<BotaoUploadProps> = ({ idbike }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null); // Defina o tipo do estado
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,9 +21,9 @@ const BotaoUpload: React.FC<BotaoUploadProps> = ({ bikeId }) => {
     if (selectedFile) {
       const formData = new FormData();
       formData.append("file", selectedFile);
-      formData.append("idbike", bikeId.toString());
+      formData.append("idbike", idbike.toString());
       try {
-        console.log("id que esta sendo enviado",bikeId)
+        console.log("id que esta sendo enviado",idbike)
         // Replace with your backend API endpoint
         const response = await axios.post(
           "http://localhost:3001/foto",

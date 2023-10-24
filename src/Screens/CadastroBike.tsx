@@ -66,7 +66,7 @@ const CadastroBike: React.FC = () => {
   const [mostrarBotaoUpload, setMostrarBotaoUpload] = useState(false);
 
   // Defina uma variável de estado para armazenar o bikeId
-  const [bikeId, setBikeId] = useState<number | null>(null);
+  const [idbike, setBikeId] = useState<number | null>(null);
 
   const handleSaveData = () => {
     const userData = {
@@ -160,7 +160,7 @@ const CadastroBike: React.FC = () => {
 
             {mostrarBotaoUpload && (
               <div id="BotaoUpload">
-                {bikeId !== null && <BotaoUpload bikeId={bikeId} />}
+                {idbike !== null && <BotaoUpload idbike={idbike} />}
               </div>
             )}
           </Col>

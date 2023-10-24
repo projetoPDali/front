@@ -20,12 +20,6 @@ const Home = () => {
           flexDirection: "row",
           flexWrap: "wrap", alignContent:"center", justifyContent: "center"}}>
         <CardBike/>
-        <CardBike/>
-        <CardBike/>
-        <CardBike/>
-        <CardBike/>
-        <CardBike/>
-        <CardBike/>
         </div>
 
     </div>

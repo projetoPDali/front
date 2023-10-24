@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Col, Row, Button } from "react-bootstrap";
+import { Form, Col, Row,} from "react-bootstrap";
 import COLORS from "../../constant/colors";
 
 interface FormData {
