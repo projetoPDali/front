@@ -5,7 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { navbarStyle, buttonStyle, navLinkStyle, navBrand } from "./styles";
 import logo from "../../assets/logo-simples.png";
 import Button from "react-bootstrap/Button";
-import { useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 
 
 const MainNavbar = () => {
@@ -16,7 +16,7 @@ const MainNavbar = () => {
   return (
     <Navbar expand="lg" style={navbarStyle} variant="dark">
       <Container>
-        <Navbar.Brand href="#home" style={navBrand}>
+        <Navbar.Brand href="/" style={navBrand}>
           <img
             src={logo}
             width="60"
@@ -31,10 +31,10 @@ const MainNavbar = () => {
         />
         <Navbar.Collapse id="basic-navbar-nav" style={{ paddingBottom: 7 }}>
           <Nav className="ml-auto mx-auto justify-content-between">
-            <Nav.Link style={navLinkStyle} href="#home">
+            <Nav.Link style={navLinkStyle} href="/">
               Inicio
             </Nav.Link>
-            <Nav.Link style={navLinkStyle} href="#features">
+            <Nav.Link style={navLinkStyle} href="">
               Bicicletas
             </Nav.Link>
             <Nav.Link style={navLinkStyle} href="#pricing">

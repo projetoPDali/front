@@ -4,6 +4,7 @@ import { CSSProperties } from "react";
 import imageHeader from "../../assets/image-header.png";
 import COLORS from "../../constant/colors";
 
+
 interface CardLadoProps {
   cardBackgroundColor: keyof typeof COLORS;
   imageColBackgroundColor: keyof typeof COLORS;
@@ -18,7 +19,6 @@ const CardLado: React.FC<CardLadoProps> = ({
   const cardStyle: CSSProperties = {
     backgroundColor: COLORS[cardBackgroundColor],
     borderRadius: 0,
- 
     paddingLeft: "1vw",
     boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.4)",
   };
@@ -30,7 +30,6 @@ const CardLado: React.FC<CardLadoProps> = ({
   };
 
   return (
-   
     <Card style={cardStyle} className="mb-3">
       <Card.Body>
         <Row>
@@ -50,7 +49,7 @@ const CardLado: React.FC<CardLadoProps> = ({
         </Row>
       </Card.Body>
     </Card>
-    );
+  );
 };
 
 export default CardLado;

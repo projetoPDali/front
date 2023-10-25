@@ -6,7 +6,8 @@ const COLORS = {
     gray: "#7D7474",
     brown: "#574D4D",
     lightGreen: "#B7E0D7",
-    lightyellow: "#ECCEAB"
+    lightyellow: "#ECCEAB",
+    lightGray:"#EEEEEE"
 }
 
 export default COLORS;
