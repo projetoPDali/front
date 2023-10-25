@@ -9,9 +9,9 @@ const Home = () => {
   return (
     <div>
       <MainNavbar />
-      <Header/>
-<Search/>
-     <CardBike/>
+      <Header />
+      <Search />
+      <CardBike />
     </div>
   );
 };
