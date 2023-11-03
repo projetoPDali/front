@@ -4,47 +4,56 @@ import { cadastrarUser } from "../../api/cadastrarUser";
 import { inputStyle } from "./styles";
 import google from "../../assets/google.png";
 import YellowButton from "../Buttons/YellowBotton";
-import GoogleLogin from "react-google-login";
+import { GoogleLogin } from "react-google-login";
 import COLORS from "../../constant/colors";
 
 const SignupForm: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [showAlert, setShowAlert] = useState(false);
-  const [alertVariant, setAlertVariant] = useState<string | null>(null);
+  const [alertVariant, setAlertVariant] = useState<string>("danger"); // Valor padrão definido como "danger"
+  const [formData, setFormData] = useState({
+    mail: "",
+    name: "",
+    alias: "",
+    phone: "",
+  });
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const formData = new FormData(event.currentTarget);
-    const mail = formData.get("mail") as string;
-    const name = formData.get("name") as string;
-    const alias = formData.get("alias") as string;
-    const phone = formData.get("phone") as string;
+    // Atualiza o estado com os dados do formulário
+    const mail = formData.mail;
+    const name = formData.name;
+    const alias = formData.alias;
+    const phone = formData.phone;
 
-    const userData = {
-      mail,
-      name,
-      alias,
-      phone,
-    };
+    console.log("Mail:", mail);
+    console.log("Name:", name);
+    console.log("Alias:", alias);
+    console.log("Phone:", phone);
 
     try {
-      const registeredUser = await cadastrarUser(userData);
+      const registeredUser = await cadastrarUser({
+        mail,
+        name,
+        alias,
+        phone,
+      });
 
       if (registeredUser !== null) {
         console.log("User registered:", registeredUser);
         setError("Usuário cadastrado com sucesso");
-        setAlertVariant("success"); // Define a classe de sucesso
+        setAlertVariant("success");
         setShowAlert(true);
       } else {
         setError("Erro ao registrar o usuário");
-        setAlertVariant("danger"); // Define a classe de erro
+        setAlertVariant("danger");
         setShowAlert(true);
       }
     } catch (error: any) {
       console.error("Error registering user:", error);
       setError(error.message);
-      setAlertVariant("danger"); // Define a classe de erro
+      setAlertVariant("danger");
       setShowAlert(true);
     }
   };
@@ -54,15 +63,20 @@ const SignupForm: React.FC = () => {
   };
 
   const responseGoogle = (response: any) => {
-    // Implemente a lógica aqui para lidar com a resposta do Google Login
     console.log(response);
+  };
+
+  // Função para atualizar o estado do formulário
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   return (
     <div>
       <Form onSubmit={handleFormSubmit}>
         {showAlert && (
-          <Alert variant="danger" onClose={handleAlertClose} dismissible>
+          <Alert variant={alertVariant} onClose={handleAlertClose} dismissible>
             {error}
           </Alert>
         )}
@@ -73,6 +87,8 @@ const SignupForm: React.FC = () => {
             placeholder="Email"
             name="mail"
             style={inputStyle}
+            value={formData.mail}
+            onChange={handleInputChange}
           />
         </Form.Group>
 
@@ -82,6 +98,8 @@ const SignupForm: React.FC = () => {
             placeholder="Nome"
             name="name"
             style={inputStyle}
+            value={formData.name}
+            onChange={handleInputChange}
           />
         </Form.Group>
 
@@ -91,6 +109,8 @@ const SignupForm: React.FC = () => {
             placeholder="Nome de Usuário"
             name="alias"
             style={inputStyle}
+            value={formData.alias}
+            onChange={handleInputChange}
           />
         </Form.Group>
 
@@ -100,6 +120,8 @@ const SignupForm: React.FC = () => {
             placeholder="Telefone"
             name="phone"
             style={inputStyle}
+            value={formData.phone}
+            onChange={handleInputChange}
           />
         </Form.Group>
 
@@ -126,16 +148,16 @@ const SignupForm: React.FC = () => {
                   borderWidth: 0,
                   fontWeight: "bold",
                   boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.4)",
-                  minWidth: "151px", // Defina a largura mínima desejada
+                  minWidth: "151px",
                   minHeight: "41px",
                   color: COLORS.white,
                   borderRadius: 7,
                 }}
                 onClick={renderProps.onClick}
                 disabled={renderProps.disabled}
-                className="YellowButton" // Adicione a classe de estilo que você deseja
+                className="YellowButton"
               >
-                <img src={google} alt="logo google" width={30} height={30}/>
+                <img src={google} alt="logo google" width={30} height={30} />
               </button>
             )}
           />
@@ -146,4 +168,3 @@ const SignupForm: React.FC = () => {
 };
 
 export default SignupForm;
-/*fewfwegf */
