@@ -7,6 +7,7 @@ interface UserData {
   name: string;
   alias: string;
   phone: string;
+  password: string;
 }
 
 export async function cadastrarUser(userData: UserData): Promise<any> {

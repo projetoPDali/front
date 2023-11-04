@@ -5,6 +5,7 @@ import Perfil from './Screens/Perfil';
 import CadastroBike from './Screens/CadastroBike';
 import CadastroUser from './Screens/CadastroUser';
 import DetalhesBike from './Screens/DetalhesBike';
+import Login from './Screens/Login';
 
 function AppRouter() {
   return (
@@ -15,6 +16,7 @@ function AppRouter() {
         <Route path="/cadastro-bike" element={<CadastroBike/>} />
         <Route path="/cadastro-user" element={<CadastroUser/>} />
         <Route path="/detalhes-bike" element={<DetalhesBike/>} />
+        <Route path="/login" element={<Login/>} />
       </Routes>
     </Router>
   );
