@@ -5,12 +5,11 @@ import google from "../../assets/google.png";
 import YellowButton from "../Buttons/YellowBotton";
 import GoogleLogin from "react-google-login";
 import COLORS from "../../constant/colors";
-import { fazerLogin } from "../../api/fazerLogin"; // Importe a função fazerLogin
+import { fazerLogin } from "../../api/fazerLogin";
 
 const SigninForm: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [showAlert, setShowAlert] = useState(false);
-  const [alertVariant, setAlertVariant] = useState<string | null>(null);
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -19,21 +18,24 @@ const SigninForm: React.FC = () => {
     const mail = formData.get("mail") as string;
     const password = formData.get("password") as string;
   
-    console.log('Email fornecido no frontend:', mail); // Adicione esta linha
-  
     try {
-      const userData = await fazerLogin({ mail, password });
+      const errorMessage = await fazerLogin({ mail, password });
   
-      // Se a função fazerLogin não lançou uma exceção, o login foi bem-sucedido
-      console.log("Login bem-sucedido:", userData);
-      // Faça o redirecionamento ou ação apropriada após o login bem-sucedido, se necessário.
+      if (errorMessage) {
+        setError(errorMessage);
+        setShowAlert(true);
+      } else {
+        // Usuário autenticado com sucesso, redirecione ou faça outras ações necessárias
+        setError(null);
+        setShowAlert(false);
+      }
     } catch (error) {
-      setError("Credenciais inválidas");
-      setAlertVariant("danger");
+      console.error("Erro desconhecido:", error);
+      setError("Erro desconhecido");
       setShowAlert(true);
     }
   };
-
+  
   const responseGoogle = (response: any) => {
     // Implemente a lógica aqui para lidar com a resposta do Google Login
     console.log(response);
@@ -42,7 +44,6 @@ const SigninForm: React.FC = () => {
   const handleAlertClose = () => {
     setShowAlert(false);
   };
-
   return (
     <div>
       <Form onSubmit={handleFormSubmit}>
@@ -51,6 +52,7 @@ const SigninForm: React.FC = () => {
             {error}
           </Alert>
         )}
+
 
         <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
           <Form.Control

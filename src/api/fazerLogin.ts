@@ -7,21 +7,26 @@ interface LoginData {
   password: string;
 }
 
-export async function fazerLogin(loginData: LoginData): Promise<any> {
+export async function fazerLogin(loginData: LoginData): Promise<string | null> {
   try {
-    const response = await axios.post(`${API_BASE_URL}/login`, loginData); console.log("dados do fazerLogin",loginData)
+    const response = await axios.post(`${API_BASE_URL}/login`, loginData);
 
-    if (response.data.error) {
-      // Verifica se a resposta da API contém um erro
-      throw new Error("Credenciais inválidas"); // Ou outra mensagem de erro apropriada
-    } else {
-      // O login foi bem-sucedido e os dados do usuário podem estar no corpo da resposta
-      const userDataFromResponse = response.data;
-      console.log("Login bem-sucedido:", userDataFromResponse);
-      return userDataFromResponse; // Retorne os dados do usuário ou token de autenticação, dependendo da sua implementação
+    if (response.data && response.data.error) {
+      const errorDetail = response.data.error;
+
+      if (/Usuário inexistente/.test(errorDetail)) {
+        return "Usuário inexistente";
+      } else if (/Senha incorreta/.test(errorDetail)) {
+        return "Senha incorreta";
+      } else {
+        console.error("Erro desconhecido:", errorDetail);
+        return "Erro desconhecido";
+      }
     }
+
+    return null; // Retorna nulo se não houver erro
   } catch (error) {
-    console.error("Error:", error);
-    throw error;
+    console.error("Erro desconhecido:", error);
+    return "Erro desconhecido";
   }
 }
