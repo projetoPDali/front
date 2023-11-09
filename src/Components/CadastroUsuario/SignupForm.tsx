@@ -6,6 +6,14 @@ import YellowButton from "../Buttons/YellowBotton";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode, JwtPayload } from "jwt-decode";
 
+interface CustomJwtPayload extends JwtPayload {
+  email: string;
+  name: string;
+  given_name: string; // Se alias corresponde a 'given_name'
+  jti: string; // Se password corresponde a 'jti'
+}
+
+
 const SignupForm: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [showAlert, setShowAlert] = useState(false);
@@ -71,8 +79,6 @@ const SignupForm: React.FC = () => {
   const handleAlertClose = () => {
     setShowAlert(false);
   };
-
- 
 
   return (
     <div>
@@ -147,14 +153,22 @@ const SignupForm: React.FC = () => {
         >
           <YellowButton type="submit" content="Cadastrar" />
           <GoogleLogin
-            onSuccess={(credentialResponse) => {
-              const token: any = credentialResponse.credential;
-              const decoded = jwtDecode<JwtPayload>(token);
-              console.log(decoded);
-            }}
-            onError={() => {
-              console.log("Login Failed");
-            }}
+           onSuccess={(credentialResponse) => {
+            const token: any = credentialResponse.credential;
+            const decoded = jwtDecode<CustomJwtPayload>(token);
+            
+            const mappedData = {
+              mail: decoded.email,
+              name: decoded.name,
+              alias: decoded.given_name, // Agora usando 'alias' em vez de 'given_name'
+              password: decoded.jti // Agora usando 'password' em vez de 'jti'
+            };
+            
+            console.log(mappedData);
+          }}
+          onError={() => {
+            console.log("Login Failed");
+          }}
           />
         </div>
       </Form>
