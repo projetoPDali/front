@@ -2,10 +2,9 @@ import React, { FormEvent, useState } from "react";
 import { Form, Alert } from "react-bootstrap";
 import { cadastrarUser } from "../../api/cadastrarUser";
 import { inputStyle } from "./styles";
-import google from "../../assets/google.png";
 import YellowButton from "../Buttons/YellowBotton";
-import GoogleLogin from "react-google-login";
-import COLORS from "../../constant/colors";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode, JwtPayload } from "jwt-decode";
 
 const SignupForm: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
@@ -73,10 +72,7 @@ const SignupForm: React.FC = () => {
     setShowAlert(false);
   };
 
-  const responseGoogle = (response: any) => {
-    // Implemente a lógica aqui para lidar com a resposta do Google Login
-    console.log(response);
-  };
+ 
 
   return (
     <div>
@@ -151,31 +147,14 @@ const SignupForm: React.FC = () => {
         >
           <YellowButton type="submit" content="Cadastrar" />
           <GoogleLogin
-            clientId="977680160090-qgos9d3eqrsu68ptnbl5q096cq8pvopj.apps.googleusercontent.com"
-            buttonText="Continuar com o Google"
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
-            cookiePolicy={"single_host_origin"}
-            render={(renderProps) => (
-              <button
-                style={{
-                  backgroundColor: COLORS.secondary,
-                  borderColor: COLORS.secondary,
-                  borderWidth: 0,
-                  fontWeight: "bold",
-                  boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.4)",
-                  minWidth: "151px",
-                  minHeight: "41px",
-                  color: COLORS.white,
-                  borderRadius: 7,
-                }}
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
-                className="YellowButton"
-              >
-                <img src={google} alt="logo google" width={30} height={30} />
-              </button>
-            )}
+            onSuccess={(credentialResponse) => {
+              const token: any = credentialResponse.credential;
+              const decoded = jwtDecode<JwtPayload>(token);
+              console.log(decoded);
+            }}
+            onError={() => {
+              console.log("Login Failed");
+            }}
           />
         </div>
       </Form>

@@ -49,7 +49,7 @@ const MainNavbar = () => {
             <Button
               variant="light"
               style={buttonStyle}
-              onClick={() => navigate("/perfil")}
+              onClick={() => navigate("/login")}
             >
               Login
             </Button>

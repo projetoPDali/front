@@ -1,11 +1,12 @@
 import React, { FormEvent, useState } from "react";
 import { Form, Alert } from "react-bootstrap";
 import { inputStyle } from "./styles";
-import google from "../../assets/google.png";
+
 import YellowButton from "../Buttons/YellowBotton";
-import GoogleLogin from "react-google-login";
-import COLORS from "../../constant/colors";
+import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
+
 import { fazerLogin } from "../../api/fazerLogin";
+import { jwtDecode, JwtPayload } from "jwt-decode";
 
 const SigninForm: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
@@ -13,14 +14,14 @@ const SigninForm: React.FC = () => {
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-  
+
     const formData = new FormData(event.currentTarget);
     const mail = formData.get("mail") as string;
     const password = formData.get("password") as string;
-  
+
     try {
       const errorMessage = await fazerLogin({ mail, password });
-  
+
       if (errorMessage) {
         setError(errorMessage);
         setShowAlert(true);
@@ -35,15 +36,12 @@ const SigninForm: React.FC = () => {
       setShowAlert(true);
     }
   };
-  
-  const responseGoogle = (response: any) => {
-    // Implemente a lógica aqui para lidar com a resposta do Google Login
-    console.log(response);
-  };
 
   const handleAlertClose = () => {
     setShowAlert(false);
   };
+
+ 
   return (
     <div>
       <Form onSubmit={handleFormSubmit}>
@@ -52,7 +50,6 @@ const SigninForm: React.FC = () => {
             {error}
           </Alert>
         )}
-
 
         <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
           <Form.Control
@@ -81,32 +78,16 @@ const SigninForm: React.FC = () => {
           }}
         >
           <YellowButton type="submit" content="Login" />
+
           <GoogleLogin
-            clientId="977680160090-qgos9d3eqrsu68ptnbl5q096cq8pvopj.apps.googleusercontent.com"
-            buttonText="Continuar com o Google"
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
-            cookiePolicy={"single_host_origin"}
-            render={(renderProps) => (
-              <button
-                style={{
-                  backgroundColor: COLORS.secondary,
-                  borderColor: COLORS.secondary,
-                  borderWidth: 0,
-                  fontWeight: "bold",
-                  boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.4)",
-                  minWidth: "151px",
-                  minHeight: "41px",
-                  color: COLORS.white,
-                  borderRadius: 7,
-                }}
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
-                className="YellowButton"
-              >
-                <img src={google} alt="logo google" width={30} height={30} />
-              </button>
-            )}
+            onSuccess={(credentialResponse) => {
+              const token: any = credentialResponse.credential;
+              const decoded = jwtDecode<JwtPayload>(token);
+              console.log(decoded);
+            }}
+            onError={() => {
+              console.log("Login Failed");
+            }}
           />
         </div>
       </Form>
