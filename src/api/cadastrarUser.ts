@@ -6,7 +6,7 @@ interface UserData {
   mail: string;
   name: string;
   alias: string;
-  phone: string;
+  phone?: string; 
   password: string;
 }
 

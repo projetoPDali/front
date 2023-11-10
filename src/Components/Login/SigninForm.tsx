@@ -3,7 +3,7 @@ import { Form, Alert } from "react-bootstrap";
 import { inputStyle } from "./styles";
 
 import YellowButton from "../Buttons/YellowBotton";
-import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
 
 import { fazerLogin } from "../../api/fazerLogin";
 import { jwtDecode, JwtPayload } from "jwt-decode";

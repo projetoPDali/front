@@ -35,9 +35,7 @@ const FormAddress: React.FC<FormAddressProps> = ({ onSaveAddress }) => {
     width: "4vw",
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setAddressData({
       ...addressData,
