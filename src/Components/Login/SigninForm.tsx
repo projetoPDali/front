@@ -8,9 +8,15 @@ import { GoogleLogin } from "@react-oauth/google";
 import { fazerLogin } from "../../api/fazerLogin";
 import { jwtDecode, JwtPayload } from "jwt-decode";
 
+interface CustomJwtPayload extends JwtPayload {
+  email: string;
+  sub: string; // Se password corresponde a 'jti'
+}
+
 const SigninForm: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [showAlert, setShowAlert] = useState(false);
+  const [googleLoginSuccess, setGoogleLoginSuccess] = useState(false);
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -37,17 +43,52 @@ const SigninForm: React.FC = () => {
     }
   };
 
+  const handleGoogleLoginSuccess = async (credentialResponse: any) => {
+    try {
+      const token: any = credentialResponse.credential;
+      const decoded = jwtDecode<CustomJwtPayload>(token);
+
+      // Realize o login com os dados obtidos do Google
+      const errorMessage = await fazerLogin({
+        mail: decoded.email,
+        password: decoded.sub, // Usando 'sub' como senha
+      });
+
+      if (errorMessage) {
+        setError(errorMessage);
+        setShowAlert(true);
+      } else {
+        // Usuário autenticado com sucesso, redirecione ou faça outras ações necessárias
+        setError(null);
+        setShowAlert(false);
+        setGoogleLoginSuccess(true);
+      }
+
+      // Imprima os dados decodificados no console.log
+      console.log("Dados decodificados do Google:", decoded);
+    } catch (error) {
+      console.error("Erro durante o login com o Google:", error);
+      setError("Erro durante o login com o Google");
+      setShowAlert(true);
+    }
+  };
+
   const handleAlertClose = () => {
     setShowAlert(false);
   };
 
- 
   return (
     <div>
       <Form onSubmit={handleFormSubmit}>
         {showAlert && (
           <Alert variant="danger" onClose={handleAlertClose} dismissible>
             {error}
+          </Alert>
+        )}
+
+        {googleLoginSuccess && (
+          <Alert variant="success" onClose={() => setGoogleLoginSuccess(false)} dismissible>
+            Login com o Google bem-sucedido!
           </Alert>
         )}
 
@@ -80,11 +121,7 @@ const SigninForm: React.FC = () => {
           <YellowButton type="submit" content="Login" />
 
           <GoogleLogin
-            onSuccess={(credentialResponse) => {
-              const token: any = credentialResponse.credential;
-              const decoded = jwtDecode<JwtPayload>(token);
-              console.log(decoded);
-            }}
+            onSuccess={handleGoogleLoginSuccess}
             onError={() => {
               console.log("Login Failed");
             }}

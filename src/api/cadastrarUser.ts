@@ -17,9 +17,7 @@ export async function cadastrarUser(userData: UserData): Promise<any> {
     if (response.data.error) {
       const errorDetail = response.data.error;
 
-      if (/Codinome já existe/.test(errorDetail)) {
-        throw new Error("Codinome já existe");
-      } else if (/E-mail já existe/.test(errorDetail)) {
+       if (/E-mail já existe/.test(errorDetail)) {
         throw new Error("E-mail já existe");
       } else if (/Telefone já existe/.test(errorDetail)) {
         throw new Error("Telefone já existe");

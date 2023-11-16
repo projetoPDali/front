@@ -10,9 +10,8 @@ interface CustomJwtPayload extends JwtPayload {
   email: string;
   name: string;
   given_name: string; // Se alias corresponde a 'given_name'
-  jti: string; // Se password corresponde a 'jti'
+  sub: string; // Se password corresponde a 'jti'
 }
-
 
 const SignupForm: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
@@ -153,22 +152,42 @@ const SignupForm: React.FC = () => {
         >
           <YellowButton type="submit" content="Cadastrar" />
           <GoogleLogin
-           onSuccess={(credentialResponse) => {
-            const token: any = credentialResponse.credential;
-            const decoded = jwtDecode<CustomJwtPayload>(token);
-            
-            const mappedData = {
-              mail: decoded.email,
-              name: decoded.name,
-              alias: decoded.given_name, // Agora usando 'alias' em vez de 'given_name'
-              password: decoded.jti // Agora usando 'password' em vez de 'jti'
-            };
-            
-            console.log(mappedData);
-          }}
-          onError={() => {
-            console.log("Login Failed");
-          }}
+            onSuccess={async (credentialResponse) => {
+              try {
+                const token: any = credentialResponse.credential;
+                const decoded = jwtDecode<CustomJwtPayload>(token);
+
+                const mappedData = {
+                  mail: decoded.email,
+                  name: decoded.name,
+                  alias: decoded.given_name,
+                  password: decoded.sub,
+                };
+
+                // Call your cadastrarUser function with the mapped data
+                const registeredUser = await cadastrarUser(mappedData);
+
+                if (registeredUser !== null) {
+                  console.log("User registered with Google:", registeredUser);
+                  setError("Usuário cadastrado com sucesso");
+                  setAlertVariant("success");
+                  setShowAlert(true);
+                } else {
+                  setError("Erro ao registrar o usuário com Google");
+                  setAlertVariant("danger");
+                  setShowAlert(true);
+                }
+              } catch (error: any) {
+                // Explicitly type the error variable
+                console.error("Error registering user with Google:", error);
+                setError(error.message);
+                setAlertVariant("danger");
+                setShowAlert(true);
+              }
+            }}
+            onError={() => {
+              console.log("Login Failed");
+            }}
           />
         </div>
       </Form>
