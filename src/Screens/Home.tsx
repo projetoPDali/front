@@ -16,7 +16,7 @@ const Home = () => {
       <CardBike />
 
       {/* Conditionally display the user's name if logged in */}
-      {user && <h1>Welcome, {user.email}!</h1>}
+      {user && <h1>Welcome, {user.name}! Seu id é {user.id}</h1>}
     </div>
   );
 };

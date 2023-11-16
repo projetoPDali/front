@@ -6,15 +6,15 @@ import React, {
   useEffect,
 } from "react";
 
-interface User {
-  email: string;
-  sub: string;
-  
+export interface User {
+  mail: string;
+  name: string;
+  id: number;
 }
 
 interface AuthContextType {
-  user: User | null;
-  login: (userData: User) => void;
+  user: User | null; // Change this line to accept null
+  login: (userData: User | null) => void; // Change this line to accept null
   logout: () => void;
 }
 
@@ -35,9 +35,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   }, []);
 
-  const login = (userData: User) => {
+  const login = (userData: User | null) => {
     setUser(userData);
-    localStorage.setItem("user", JSON.stringify(userData));
+    if (userData) {
+      localStorage.setItem("user", JSON.stringify(userData));
+    } else {
+      localStorage.removeItem("user");
+    }
   };
 
   const logout = () => {
@@ -47,9 +51,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const contextValue: AuthContextType = { user, login, logout };
 
-  return (
-    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = (): AuthContextType => {

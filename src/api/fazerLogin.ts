@@ -7,7 +7,15 @@ interface LoginData {
   password: string;
 }
 
-export async function fazerLogin(loginData: LoginData): Promise<string | null> {
+export interface User {
+  mail: string;
+  password: string;
+  id: number;
+  cep: string;
+  name: string;
+}
+
+export async function fazerLogin(loginData: LoginData): Promise<string | null | User> {
   try {
     const response = await axios.post(`${API_BASE_URL}/login`, loginData);
 
@@ -24,10 +32,13 @@ export async function fazerLogin(loginData: LoginData): Promise<string | null> {
       }
     }
 
-    // Log the response data
-    console.log("Response Data:", response.data);
+    // Extract user object from response
+    const user: User = response.data.user;
 
-    return null; // Retorna nulo se não houver erro
+    // Log the user object
+    console.log("User Object:", user);
+
+    return user; // Return user object if there is no error
   } catch (error) {
     console.error("Erro desconhecido:", error);
     return "Erro desconhecido";

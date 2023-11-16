@@ -3,20 +3,19 @@ import { Form, Alert } from "react-bootstrap";
 import { inputStyle } from "./styles";
 import YellowButton from "../Buttons/YellowBotton";
 import { GoogleLogin } from "@react-oauth/google";
-import { fazerLogin } from "../../api/fazerLogin";
 import { jwtDecode, JwtPayload } from "jwt-decode";
 import { useAuth } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { fazerLogin, User } from "../../api/fazerLogin";
 
 interface CustomJwtPayload extends JwtPayload {
   email: string;
   sub: string;
-  
 }
 
 const SigninForm: React.FC = () => {
   const { login } = useAuth();
-  const navigate = useNavigate(); // Import useNavigate
+  const navigate = useNavigate();
 
   const [error, setError] = useState<string | null>(null);
   const [showAlert, setShowAlert] = useState(false);
@@ -30,15 +29,15 @@ const SigninForm: React.FC = () => {
     const password = formData.get("password") as string;
 
     try {
-      const errorMessage = await fazerLogin({ mail, password });
+      const user = await fazerLogin({ mail, password });
 
-      if (errorMessage) {
-        setError(errorMessage);
+      if (typeof user === "string") {
+        setError(user);
         setShowAlert(true);
       } else {
         setError(null);
         setShowAlert(false);
-        login({ email: mail, sub: password });
+        login(user);
 
         // Navigate to "/" after successful login
         navigate("/");
@@ -55,19 +54,19 @@ const SigninForm: React.FC = () => {
       const token: any = credentialResponse.credential;
       const decoded = jwtDecode<CustomJwtPayload>(token);
 
-      const errorMessage = await fazerLogin({
+      const user = await fazerLogin({
         mail: decoded.email,
         password: decoded.sub,
       });
 
-      if (errorMessage) {
-        setError(errorMessage);
+      if (typeof user === "string") {
+        setError(user);
         setShowAlert(true);
       } else {
         setError(null);
         setShowAlert(false);
         setGoogleLoginSuccess(true);
-        login({ email: decoded.email, sub: decoded.sub });
+        login(user);
 
         // Navigate to "/" after successful login
         navigate("/");
