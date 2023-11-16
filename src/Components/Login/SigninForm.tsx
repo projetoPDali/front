@@ -1,19 +1,23 @@
 import React, { FormEvent, useState } from "react";
 import { Form, Alert } from "react-bootstrap";
 import { inputStyle } from "./styles";
-
 import YellowButton from "../Buttons/YellowBotton";
 import { GoogleLogin } from "@react-oauth/google";
-
 import { fazerLogin } from "../../api/fazerLogin";
 import { jwtDecode, JwtPayload } from "jwt-decode";
+import { useAuth } from "../../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 interface CustomJwtPayload extends JwtPayload {
   email: string;
-  sub: string; // Se password corresponde a 'jti'
+  sub: string;
+  
 }
 
 const SigninForm: React.FC = () => {
+  const { login } = useAuth();
+  const navigate = useNavigate(); // Import useNavigate
+
   const [error, setError] = useState<string | null>(null);
   const [showAlert, setShowAlert] = useState(false);
   const [googleLoginSuccess, setGoogleLoginSuccess] = useState(false);
@@ -32,9 +36,12 @@ const SigninForm: React.FC = () => {
         setError(errorMessage);
         setShowAlert(true);
       } else {
-        // Usuário autenticado com sucesso, redirecione ou faça outras ações necessárias
         setError(null);
         setShowAlert(false);
+        login({ email: mail, sub: password });
+
+        // Navigate to "/" after successful login
+        navigate("/");
       }
     } catch (error) {
       console.error("Erro desconhecido:", error);
@@ -48,23 +55,24 @@ const SigninForm: React.FC = () => {
       const token: any = credentialResponse.credential;
       const decoded = jwtDecode<CustomJwtPayload>(token);
 
-      // Realize o login com os dados obtidos do Google
       const errorMessage = await fazerLogin({
         mail: decoded.email,
-        password: decoded.sub, // Usando 'sub' como senha
+        password: decoded.sub,
       });
 
       if (errorMessage) {
         setError(errorMessage);
         setShowAlert(true);
       } else {
-        // Usuário autenticado com sucesso, redirecione ou faça outras ações necessárias
         setError(null);
         setShowAlert(false);
         setGoogleLoginSuccess(true);
+        login({ email: decoded.email, sub: decoded.sub });
+
+        // Navigate to "/" after successful login
+        navigate("/");
       }
 
-      // Imprima os dados decodificados no console.log
       console.log("Dados decodificados do Google:", decoded);
     } catch (error) {
       console.error("Erro durante o login com o Google:", error);

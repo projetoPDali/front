@@ -24,6 +24,9 @@ export async function fazerLogin(loginData: LoginData): Promise<string | null> {
       }
     }
 
+    // Log the response data
+    console.log("Response Data:", response.data);
+
     return null; // Retorna nulo se não houver erro
   } catch (error) {
     console.error("Erro desconhecido:", error);
