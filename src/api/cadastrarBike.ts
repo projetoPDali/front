@@ -41,6 +41,7 @@ export async function cadastrarBike(bikeData: BikeData): Promise<any> {
         number: number,
       },
     };
+    console.log("Data to be sent to the backend:", updatedBikeData);
 
     const response = await axios.post(`${API_BASE_URL}/bike`, updatedBikeData);
 

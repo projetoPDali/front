@@ -1,8 +1,10 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import CardLado from "../Components/Perfil/CardLado";
+import CardLado from "../Components/Perfil/Cardbike";
 import AdBike from "../Components/Perfil/AdBike";
 import MainNavbar from "../Components/Navbar/Navbar";
+import CardUsuario from "../Components/Perfil/CardUsuario";
+import Cardbike from "../Components/Perfil/Cardbike";
 
 const Perfil = () => {
   return (
@@ -11,7 +13,7 @@ const Perfil = () => {
       <Container fluid style={{ padding: "2vw" }}>
         <Row>
           <Col md={6} >
-            <CardLado
+            <CardUsuario
               cardBackgroundColor="white"
               imageColBackgroundColor="primary"
               textColor="black"
@@ -21,12 +23,12 @@ const Perfil = () => {
 
           <Col md={6}>
             <AdBike />
-            <CardLado
+            <Cardbike
               cardBackgroundColor="primary"
               imageColBackgroundColor="white"
               textColor="white"
             />
-            <CardLado
+            <Cardbike
               cardBackgroundColor="primary"
               imageColBackgroundColor="white"
               textColor="white"

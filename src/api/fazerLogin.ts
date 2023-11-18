@@ -9,10 +9,12 @@ interface LoginData {
 
 export interface User {
   mail: string;
-  password: string;
-  id: number;
-  cep: string;
   name: string;
+  id: number;
+  alias: string;
+  phone?: string;
+  rents?:any
+  addresses?:any
 }
 
 export async function fazerLogin(loginData: LoginData): Promise<string | null | User> {

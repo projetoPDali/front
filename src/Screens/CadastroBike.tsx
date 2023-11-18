@@ -7,6 +7,7 @@ import COLORS from "../constant/colors";
 import MainNavbar from "../Components/Navbar/Navbar";
 import { cadastrarBike } from "../api/cadastrarBike"; // Importe a função de envio para o backend
 import BotaoUpload from "../Components/CadastroBike/BotaoUpload";
+import { useAuth } from "../Context/AuthContext";
 
 interface BikeData {
  
@@ -32,6 +33,7 @@ interface AddressData {
 }
 
 const CadastroBike: React.FC = () => {
+  const { user } = useAuth();
   const [bikeData, setBikeData] = useState<BikeData>({
    
     brand: { name: "" },
@@ -78,7 +80,7 @@ const CadastroBike: React.FC = () => {
       description: bikeData.description,
       hourlyvalue: bikeData.hourlyvalue,
       dailyvalue: bikeData.dailyvalue,
-      user: 1,
+      user: user?.id || 1, 
       brand: bikeData.brand,
       material: bikeData.material,
       address: addressData,

@@ -10,6 +10,10 @@ export interface User {
   mail: string;
   name: string;
   id: number;
+  alias: string;
+  phone?: string;
+  rents?:any
+  addresses?:any
 }
 
 interface AuthContextType {
@@ -38,12 +42,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const login = (userData: User | null) => {
     setUser(userData);
     if (userData) {
-      localStorage.setItem("user", JSON.stringify(userData));
+      const userString = JSON.stringify(userData);
+      localStorage.setItem("user", userString);
     } else {
       localStorage.removeItem("user");
     }
   };
-
+  
   const logout = () => {
     setUser(null);
     localStorage.removeItem("user");

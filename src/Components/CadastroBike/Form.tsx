@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Form, Col, Row,} from "react-bootstrap";
+import { Form, Col, Row } from "react-bootstrap";
 import COLORS from "../../constant/colors";
 
 interface FormData {
-    brand: { name: string };
+  brand: { name: string };
   rim: string;
   size: string;
   material: { name: string };
@@ -21,7 +21,7 @@ interface FormBikeProps {
 
 const FormBike: React.FC<FormBikeProps> = ({ onSaveData }) => {
   const [formData, setFormData] = useState<FormData>({
-       brand: { name: "" },
+    brand: { name: "" },
     rim: "",
     size: "",
     material: { name: "" },
@@ -102,7 +102,6 @@ const FormBike: React.FC<FormBikeProps> = ({ onSaveData }) => {
       </div>
       <Form style={{ padding: 20 }}>
         <Row>
-         
           <Form.Group className="mb-4">
             <Form.Control
               type="text"
@@ -229,7 +228,6 @@ const FormBike: React.FC<FormBikeProps> = ({ onSaveData }) => {
               onBlur={handleChange} // Adicione o evento onBlur
             />
           </Form.Group>
-          
         </Row>
       </Form>
     </div>

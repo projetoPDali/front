@@ -5,13 +5,13 @@ import imageHeader from "../../assets/image-header.png";
 import COLORS from "../../constant/colors";
 
 
-interface CardLadoProps {
+interface CardbikeProps {
   cardBackgroundColor: keyof typeof COLORS;
   imageColBackgroundColor: keyof typeof COLORS;
   textColor: keyof typeof COLORS;
 }
 
-const CardLado: React.FC<CardLadoProps> = ({
+const Cardbike: React.FC<CardbikeProps> = ({
   cardBackgroundColor,
   imageColBackgroundColor,
   textColor,
@@ -43,8 +43,11 @@ const CardLado: React.FC<CardLadoProps> = ({
           </Col>
           <Col xs={12} md={8} className="text-center">
             <Card.Title style={{ paddingTop: "1vw", color: COLORS[textColor] }}>
-              Nome Sobrenome
+           Bike
             </Card.Title>
+            <Card.Text>
+            
+            </Card.Text>
           </Col>
         </Row>
       </Card.Body>
@@ -52,4 +55,4 @@ const CardLado: React.FC<CardLadoProps> = ({
   );
 };
 
-export default CardLado;
+export default Cardbike;
