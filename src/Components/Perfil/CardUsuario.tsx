@@ -49,11 +49,10 @@ const CardUsuario: React.FC<CardUsuarioProps> = ({
             <Card.Title style={{ paddingTop: "1vw", color: COLORS[textColor] }}>
               {user?.name}
             </Card.Title>
-            <div style={{ textAlign: "left", marginLeft: 10}}>
-            <Card.Text>{user?.alias}</Card.Text>
-            <Card.Text>{user?.mail}</Card.Text>
-            <Card.Text>{user?.addresses}</Card.Text>
-            <Card.Text>{user?.phone}</Card.Text>
+            <div style={{ textAlign: "left", marginLeft: 10 }}>
+              <Card.Text style={{margin: 0}}>{user?.alias}</Card.Text>
+              <Card.Text style={{margin: 0}}>{user?.mail}</Card.Text>
+              <Card.Text style={{margin: 0}}>{user?.phone}</Card.Text>
             </div>
           </Col>
         </Row>

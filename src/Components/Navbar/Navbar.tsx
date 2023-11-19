@@ -37,9 +37,7 @@ const MainNavbar = () => {
             <Nav.Link style={navLinkStyle} href="">
               Bicicletas
             </Nav.Link>
-            <Nav.Link style={navLinkStyle} href="#pricing">
-              Guia para Utilizar o Site
-            </Nav.Link>
+
             <Nav.Link style={navLinkStyle} href="#pricing">
               Fale Conosco
             </Nav.Link>

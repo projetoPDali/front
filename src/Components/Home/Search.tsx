@@ -1,4 +1,3 @@
-
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
@@ -8,19 +7,18 @@ import COLORS from "../../constant/colors";
 const buttonsData = [
   { label: "Material", actions: ["Fibra de Carbono", "Alumínio", "Aço"] },
 
-  { label: "Marca", actions: ["Action 2"] },
-  { label: "Modelo", actions: ["Action 3"] },
-  { label: "Marcha", actions: ["Carbono", "Alumínio"] },
-  { label: "Quadro", actions: ["Action 2"] },
-  { label: "Aro", actions: ["Action 3"] },
-  { label: "Valor Hora", actions: ["Carbono", "Alumínio"] },
-  { label: "Valor Dia", actions: ["Action 2"] },
+  { label: "Marca", actions: ["Sense", "Caloi", "Oggi", "Trek", "Giant"] },
+
+  { label: "Marcha", actions: ["Sim", "Não"] },
+  { label: "Quadro", actions: ["Pequeno", "Médio", "Grande", "Extra Grande"] },
+  { label: "Aro", actions: [] },
+  { label: "Valor Hora", actions: ["Menos de R$50", "Entre R$50 e R$70"] },
+  { label: "Valor Dia", actions: ["Menos de R$100", "Entre R$110 e R$150"] },
   { label: "Suspenção", actions: ["sim", "não"] },
-  { label: "Genero", actions: ["Carbono", "Alumínio"] },
+  { label: "Genero", actions: ["Feminino", "Masculino", "Unissex"] },
 
-  // Adicione mais botões com seus valores aqui
+
 ];
-
 
 const Search = () => {
   return (
@@ -36,7 +34,7 @@ const Search = () => {
           }}
         >
           <DropdownButton
-            style={{color: COLORS.white}}
+            style={{ color: COLORS.white }}
             as={ButtonGroup}
             key={index}
             id={`dropdown-variants-${button.label}`}
@@ -44,8 +42,11 @@ const Search = () => {
             title={button.label}
           >
             {button.actions.map((action, actionIndex) => (
-              <Dropdown.Item style={{backgroundColor: COLORS.white}}
-               key={actionIndex} eventKey={actionIndex + 1}>
+              <Dropdown.Item
+                style={{ backgroundColor: COLORS.white }}
+                key={actionIndex}
+                eventKey={actionIndex + 1}
+              >
                 {action}
               </Dropdown.Item>
             ))}

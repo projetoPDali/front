@@ -127,13 +127,18 @@ const FormBike: React.FC<FormBikeProps> = ({ onSaveData }) => {
           <Col xs={7}>
             <Form.Group className="mb-4">
               <Form.Control
-                type="text"
+                as="select"
                 name="size"
-                placeholder="Tamanho do quadro"
                 style={inputStyle}
                 value={formData.size}
                 onChange={handleChange}
-              />
+              >
+                <option value="">Selecione o Tamanho do Quadro</option>
+                <option value="pequeno">Pequeno</option>
+                <option value="médio">Médio</option>
+                <option value="grande">Grande</option>
+                <option value="grande">Extra Grande</option>
+              </Form.Control>
             </Form.Group>
           </Col>
           <Form.Group className="mb-4" controlId="exampleForm.ControlInput3">
@@ -168,13 +173,17 @@ const FormBike: React.FC<FormBikeProps> = ({ onSaveData }) => {
           <Col xs={7}>
             <Form.Group className="mb-4">
               <Form.Control
-                type="text"
+                as="select"
                 name="gear"
                 placeholder="Marcha"
                 style={inputStyle}
                 value={formData.gear}
                 onChange={handleChange}
-              />
+              >
+                <option value="">Marcha</option>
+                <option value="sim">Sim</option>
+                <option value="nao">Não </option>
+              </Form.Control>
             </Form.Group>
           </Col>
           <Form.Group className="mb-4">

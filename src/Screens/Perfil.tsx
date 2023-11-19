@@ -1,10 +1,9 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import CardLado from "../Components/Perfil/Cardbike";
 import AdBike from "../Components/Perfil/AdBike";
 import MainNavbar from "../Components/Navbar/Navbar";
 import CardUsuario from "../Components/Perfil/CardUsuario";
-import Cardbike from "../Components/Perfil/Cardbike";
+import UserBikes from "../Components/Perfil/UserBikes";
 
 const Perfil = () => {
   return (
@@ -23,16 +22,11 @@ const Perfil = () => {
 
           <Col md={6}>
             <AdBike />
-            <Cardbike
-              cardBackgroundColor="primary"
-              imageColBackgroundColor="white"
-              textColor="white"
+            <UserBikes
+             
+              
             />
-            <Cardbike
-              cardBackgroundColor="primary"
-              imageColBackgroundColor="white"
-              textColor="white"
-            />
+            
           </Col>
 
           

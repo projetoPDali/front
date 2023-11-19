@@ -4,6 +4,7 @@ import Header from "../Components/Home/Header";
 import CardBike from "../Components/Home/CardBike";
 import Search from "../Components/Home/Search";
 import { useAuth } from "../Context/AuthContext"; // Import useAuth
+import { Container } from "react-bootstrap";
 
 const Home = () => {
   const { user } = useAuth();
@@ -12,11 +13,10 @@ const Home = () => {
     <div>
       <MainNavbar />
       <Header />
-      <Search />
+      <Container fluid><Search /></Container>
       <CardBike />
 
-      {/* Conditionally display the user's name if logged in */}
-      {user && <h1>Welcome, {user.name}! Seu id é {user.id}</h1>}
+     
     </div>
   );
 };
