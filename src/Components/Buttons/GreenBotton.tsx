@@ -2,8 +2,10 @@ import Button from "react-bootstrap/Button";
 import COLORS from "../../constant/colors";
 import { useNavigate } from "react-router-dom";
 
+
 const GreenBotton = () => {
   const navigate = useNavigate();
+
 
   return ( 
       <Button
@@ -23,6 +25,7 @@ const GreenBotton = () => {
       >
         CADASTRE-SE
       </Button>
+
   
   );
 };
