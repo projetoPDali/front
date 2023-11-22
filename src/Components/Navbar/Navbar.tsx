@@ -34,10 +34,7 @@ const MainNavbar = () => {
             <Nav.Link style={navLinkStyle} href="/">
               Inicio
             </Nav.Link>
-            <Nav.Link style={navLinkStyle} href="">
-              Bicicletas
-            </Nav.Link>
-
+           
             <Nav.Link style={navLinkStyle} href="#pricing">
               Fale Conosco
             </Nav.Link>

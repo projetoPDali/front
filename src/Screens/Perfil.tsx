@@ -11,26 +11,18 @@ const Perfil = () => {
       <MainNavbar />
       <Container fluid style={{ padding: "2vw" }}>
         <Row>
-          <Col md={6} >
+          <Col md={6}>
             <CardUsuario
               cardBackgroundColor="white"
               imageColBackgroundColor="primary"
               textColor="black"
-              
             />
           </Col>
 
           <Col md={6}>
             <AdBike />
-            <UserBikes
-             
-              
-            />
-            
+            <UserBikes />
           </Col>
-
-          
-          
         </Row>
       </Container>
     </div>

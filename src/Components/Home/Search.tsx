@@ -12,16 +12,17 @@ interface Filter {
 
 const buttonsData: Filter[] = [
   { label: "Material", actions: ["Fibra de Carbono", "Alumínio", "Aço"] },
-  { label: "Marca", actions: ["Sense", "Caloi", "Oggi", "Trek", "Giant"] },
+  { label: "Marca", actions: ["Sense", "Caloi", "Oggi", "Trek", "Giant", "Outra"] },
   { label: "Marcha", actions: ["Sim", "Não"] },
   { label: "Quadro", actions: ["Pequeno", "Médio", "Grande", "Extra Grande"] },
-  { label: "Aro", actions: [] },
+  { label: "Aro", actions: ["26 polegadas", "27,5 polegadas", "29 polegadas", "700c", "24 polegadas", "20 polegadas", "16 polegadas", "Outro"] },
   { label: "Valor Hora", actions: ["Menos de R$50", "Entre R$50 e R$70"] },
   { label: "Valor Dia", actions: ["Menos de R$100", "Entre R$110 e R$150"] },
-  { label: "Suspensão", actions: ["sim", "não"] },
+  { label: "Suspensão", actions: ["Sim", "Não"] },
   { label: "Genero", actions: ["Feminino", "Masculino", "Unissex"] },
   { label: "Limpar Filtros", actions: [] },
 ];
+
 
 const Search = ({ onFilterChange }: { onFilterChange: (newSelectedFilters: string[]) => void }) => {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);

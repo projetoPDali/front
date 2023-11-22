@@ -22,7 +22,7 @@ const Home = () => {
       <Container fluid>
         <Search onFilterChange={handleFilterChange} />
       </Container>
-      <CardBike />
+      <CardBike filters={selectedFilters} />
     </div>
   );
 };
