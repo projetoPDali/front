@@ -6,12 +6,17 @@ import { navbarStyle, buttonStyle, navLinkStyle, navBrand } from "./styles";
 import logo from "../../assets/logo-simples.png";
 import Button from "react-bootstrap/Button";
 import {useNavigate } from "react-router-dom";
+import { useAuth } from "../../Context/AuthContext"; // Import useAuth
 
 
 const MainNavbar = () => {
   const navigate = useNavigate();
 
   const [expanded, setExpanded] = useState(false);
+
+  const { user } = useAuth();
+  const logado = user?.id == null ? true : false
+
 
   return (
     <Navbar expand="lg" style={navbarStyle} variant="dark">
@@ -41,6 +46,7 @@ const MainNavbar = () => {
           </Nav>
           <Nav className="ml-auto">
             {/* Alinha o botão à direita */}
+            {logado &&
             <Button
               variant="light"
               style={buttonStyle}
@@ -48,6 +54,7 @@ const MainNavbar = () => {
             >
               Login
             </Button>
+}
           </Nav>
         </Navbar.Collapse>
       </Container>
