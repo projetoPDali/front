@@ -18,7 +18,7 @@ const CardUsuario: React.FC<CardUsuarioProps> = ({
   imageColBackgroundColor,
   textColor,
 }) => {
-  const { user } = useAuth(); // Access user data from context
+  const { user } = useAuth(); 
 
   const cardStyle: CSSProperties = {
     backgroundColor: COLORS[cardBackgroundColor],
@@ -50,7 +50,7 @@ const CardUsuario: React.FC<CardUsuarioProps> = ({
               {user?.name}
             </Card.Title>
             <div style={{ textAlign: "left", marginLeft: 10 }}>
-              <Card.Text style={{margin: 0}}>{user?.alias}</Card.Text>
+              
               <Card.Text style={{margin: 0}}>{user?.mail}</Card.Text>
               <Card.Text style={{margin: 0}}>{user?.phone}</Card.Text>
             </div>

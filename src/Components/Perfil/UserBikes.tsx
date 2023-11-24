@@ -4,6 +4,7 @@ import { CSSProperties } from "react";
 import { useAuth } from "../../Context/AuthContext";
 import axios from "axios";
 import COLORS from "../../constant/colors";
+import { useNavigate } from "react-router-dom";
 
 interface Bike {
   id: number;
@@ -16,6 +17,7 @@ interface Bike {
 }
 
 const UserBikes: React.FC = () => {
+  const navigate = useNavigate();
   const { user } = useAuth();
   const [userBikes, setUserBikes] = useState<Bike[]>([]);
 
@@ -49,27 +51,40 @@ const UserBikes: React.FC = () => {
     overflow: "hidden"
   };
 
+  const handleCardClick = (bike: Bike) => {
+    // Navegar para a página detalhes-vagas com os dados da bike
+    navigate("/detalhes-bike", { state: { bike } });
+  };
+
   return (
     <div>
       {userBikes.map((bike) => (
-        <Card key={bike.id} style={cardStyle}>
+        <Card
+          key={bike.id}
+          style={cardStyle}
+          onClick={() => handleCardClick(bike)}
+        >
           <Card.Body>
             <Row>
               <Col xs={12} md={4} style={imageColStyle}>
                 {bike.photos.length > 0 && (
-                  
-                    <img
-                      src={`http://localhost:3001/foto/public/${bike.photos[0].filename}`}
-                      alt={`Bike ${bike.id}`}
-                      className="img-fluid"
-                      style={{ width: "100%", height: "100%" }}
-                    />
-                 
+                  <img
+                    src={`http://localhost:3001/foto/public/${bike.photos[0].filename}`}
+                    alt={`Bike ${bike.id}`}
+                    className="img-fluid"
+                    style={{ width: "100%", height: "100%" }}
+                  />
                 )}
               </Col>
               <Col xs={12} md={8}>
                 <div style={{ color: COLORS.white, marginTop: "1vw" }}>
-                  <Card.Title>{bike.description}</Card.Title>
+                  <Card.Title  style={{
+                      overflow: "hidden",
+                      display: "-webkit-box",
+                      WebkitBoxOrient: "vertical",
+                      WebkitLineClamp: 3, // Limit to 4 lines
+                     
+                    }}>{bike.description}</Card.Title>
                   <Card.Text style={{ margin: 0 }}>
                     {bike.address.city}, {bike.address.state}
                   </Card.Text>

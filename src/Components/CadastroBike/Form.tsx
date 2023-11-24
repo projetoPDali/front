@@ -122,22 +122,13 @@ const FormBike: React.FC<FormBikeProps> = ({ onSaveData }) => {
           <Col xs={5}>
           <Form.Group className="mb-4">
               <Form.Control
-                as="select"
+                type="text"
                 name="rim"
+                placeholder="Aro"
                 style={inputStyle}
                 value={formData.rim}
                 onChange={handleChange}
-              >
-                <option value="">Selecione o Aro</option>
-                <option value="26 polegadas">26 polegadas</option>
-                <option value="27,5 polegadas">27,5 polegadas</option>
-                <option value="29 polegadas">29 polegadas</option>
-                <option value="700c">700c</option>
-                <option value="24 polegadas">24 polegadas</option>
-                <option value="20 polegadas">20 polegadas</option>
-                <option value="16 polegadas">16 polegadas</option>
-                <option value="outro">Outro</option>
-              </Form.Control>
+              />
             </Form.Group>
           </Col>
           <Col xs={7}>
@@ -178,6 +169,7 @@ const FormBike: React.FC<FormBikeProps> = ({ onSaveData }) => {
                 as="select"
                 name="suspension"
                 style={inputStyle}
+                placeholder="Aro"
                 value={formData.suspension ? "sim" : "nao"}
                 onChange={handleChange}
               >

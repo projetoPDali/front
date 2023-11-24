@@ -22,7 +22,8 @@ export const buttonStyle: CSSProperties = {
     fontFamily: "sans-serif",
     fontWeight: "bold",
     height: '45px',
-    width: '90px',
+    paddingRight: 15,
+    paddingLeft: 15,
     borderRadius: 10,
     boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.4)',
     
